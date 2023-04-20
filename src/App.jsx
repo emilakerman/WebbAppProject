@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './App.css'
-import axios from 'redaxios'; //external api fetch library (replacing fetch, this is more light weight)
+import axios from 'redaxios'; //external api fetch library (replacing fetch, this is more light weight apparently)
 
 let apiURL = "http://www.omdbapi.com/?apikey=9875f2c9";
 
@@ -13,9 +13,11 @@ const App = () => {
   }, []);
 
   const fetchData = (title) => {
-    axios.get(`${apiURL}&t=${title}`)
+    axios.get(`${apiURL}&s=${title}`)
     .then((response) => {
-      console.log(response.data);
+      for (const movie in response.data.Search) {
+        console.log(response.data.Search[movie].Title) //logs out a bunch of batman movies
+      }
     })
     .catch((error) => {
       ///various error handling
