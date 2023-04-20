@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import './App.css'
-import axios from 'redaxios';
+import axios from 'redaxios'; //external api fetch library (replacing fetch, this is more light weight)
 
 let apiURL = "http://www.omdbapi.com/?apikey=9875f2c9";
 
-let title = "Batman";
+let title = "Batman"; //just using this now for static testing
 
 const App = () => {
 
@@ -18,6 +18,7 @@ const App = () => {
       console.log(response.data);
     })
     .catch((error) => {
+      ///various error handling
         if (error.response) {
         console.log(error.response.data);
         console.log(error.response.status);
