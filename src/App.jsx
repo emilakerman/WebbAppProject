@@ -4,6 +4,14 @@ import axios from 'redaxios'; //external api fetch library (replacing fetch, thi
 
 let apiURL = "http://www.omdbapi.com/?apikey=9875f2c9";
 
+//TMD api key
+//128373ab4341186161d282674c1d9e7b
+
+//this GET gives the trending movies of the week
+/*
+https://api.themoviedb.org/3/trending/movie/week?api_key=128373ab4341186161d282674c1d9e7b
+*/
+
 let title = "Batman"; //just using this now for static testing
 
 const App = () => {
