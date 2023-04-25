@@ -90,6 +90,10 @@ body {
     margin-top: 30px;
   }
   .movie-page {
+    border: none;
+    border-radius: 50px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 60em;
