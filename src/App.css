@@ -1,6 +1,6 @@
 body {
     font-family: var(--font-roboto);
-    background: linear-gradient(to bottom, #9da1a7, #2c3e50);
+    /* background: linear-gradient(to bottom, #9da1a7, #2c3e50); */
   }
 .movie {
     width: 310px;
