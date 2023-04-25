@@ -7,7 +7,7 @@ const MovieThumb = ({movie}) => {
     return (
         <div className='movie'>
             <div>
-                <p>{movie.title}</p>
+                <p>Click for more info</p>
             </div>
             <div>
                 <img src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${movie.backdrop_path}`} alt='Movie title'/>

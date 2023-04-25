@@ -27,7 +27,7 @@ body {
     width: 100%;
     opacity: 0;
     top: 0;
-    color: #ffffff;
+    color: #000000;
   }
   
   .movie:hover {
@@ -72,7 +72,7 @@ body {
   
   .movie:hover div:nth-of-type(2) {
     height: 100%;
-    opacity: 0.3;
+    opacity: 0.7;
   }
   
   .movie:hover div:nth-of-type(3) {
@@ -82,4 +82,29 @@ body {
   .movie:hover div:nth-of-type(1) {
     opacity: 1;
   }
-  
+  /* single view card */
+  .outerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+  }
+  .movie-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 60em;
+    height: 40em;
+    background: linear-gradient(to right, rgba(195, 20, 50, 0.8), rgba(36, 11, 54, 0.8));
+  }
+  .imageSection {
+    
+  }
+ .imageSection img {
+    height: 40em;
+    width: 30em;
+ }
+ .rightSection {
+    padding: 20px;
+    text-align: center;
+ }
+ 
