@@ -12,9 +12,11 @@ const MovieCard = () => {
         <div className="rightSection">
           <h2 className='movie-tagline'>Movie Title 2023</h2>
           <p className='movie-info'>Longer movie description about some stuff that I probablby wont read bit ts good to put in the code anyway I think.</p>
-          <h3>Genre</h3>
-          <h3>Release date</h3>
-          <h3>Average rating</h3>
+          <div className='genreReleaseContainer'>
+            <h3>Action</h3>
+            <h3>2022-01-01</h3>
+            <h3>9.7</h3>
+          </div>
           <button>Rent & Watch Online</button>
         </div>
       </div>
