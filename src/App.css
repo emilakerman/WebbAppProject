@@ -107,4 +107,82 @@ body {
     padding: 20px;
     text-align: center;
  }
- 
+
+/* mobile below */
+@media only screen and (max-width: 768px) {
+.outerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .movie-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 400px;
+    height: auto;
+    background: linear-gradient(to right, rgba(195, 20, 50, 0.8), rgba(36, 11, 54, 0.8));
+    border-radius: 20px;
+    box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.75);
+    overflow: hidden;
+  }
+  
+  .imageSection img {
+    width: 100%;
+    height: 30em;
+  }
+  
+  .rightSection {
+    text-align: center;
+  }
+  
+  h1 {
+    margin-top: 0;
+  }
+  
+  .movie-tagline {
+    margin-top: -10px;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  .movie-info {
+    margin-top: -10px;
+  }
+  
+  .movie-genres {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .movie-genres p {
+    margin: 5px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background-color: #fff;
+    color: #000;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+  
+  .movie-overview {
+    margin-top: 20px;
+  }
+  
+  .movie-overview h2 {
+    margin-bottom: 10px;
+  }
+  
+  .movie-credits {
+    margin-top: 20px;
+  }
+  
+  .movie-credits h2 {
+    margin-bottom: 10px;
+  }
+}
