@@ -3,18 +3,18 @@ import { useState, useEffect } from "react";
 import '.././App.css'
 
 
-const MovieThumb = () => {
+const MovieThumb = ({movie}) => {
     return (
         <div className='movie'>
             <div>
-                <p>year or something</p>
+                <p>{movie.title}</p>
             </div>
             <div>
-                <img src={'https://www.themoviedb.org/t/p/w300_and_h450_bestv2/mIBCtPvKZQlxubxKMeViO2UrP3q.jpg'} alt='Movie title'/>
+                <img src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${movie.backdrop_path}`} alt='Movie title'/>
             </div>
             <div>
-                <h3>title test</h3>
-                <span>genre test</span>
+                <h3>{movie.title}</h3>
+                <span>{movie.id}</span>
             </div>
         </div>
     )
