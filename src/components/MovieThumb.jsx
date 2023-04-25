@@ -14,7 +14,7 @@ const MovieThumb = ({movie}) => {
             </div>
             <div>
                 <h3>{movie.title}</h3>
-                <span>{movie.id}</span>
+                <span>{movie.release_date}</span>
             </div>
         </div>
     )
