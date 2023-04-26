@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "@firebase/firestore"
 
 
-// Kanske göra en .env fil för att gömma alla apikeys
+// TODO: Private .env file for the secret keys
 const firebaseConfig = {
   apiKey: "AIzaSyDTloBL3p_QgYBbvBNvw9gZyBsIoTIspj4",
   authDomain: "webbappproject.firebaseapp.com",

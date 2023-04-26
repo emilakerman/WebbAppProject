@@ -10,7 +10,7 @@ const App = () => {
 
   const videoElement = useRef(null);
   const {
-    //all the variables and funktions imported from the videoplayer.
+    //all the variables and functions imported from the videoplayer.
     playing,
     speed,
     muted,
