@@ -3,69 +3,56 @@ import { useState } from "react";
 
 
 const VideoPlayer = (videoContent) => {
-    const [playerState, setPlayerState] = useState({
-        isPlaying : false,
-        progress: 0,
-        speed: 1,
-        isMuted : false
-    });
+    const [playing, setPlaying] = useState(false);
+    const [progress, setProgress] = useState(0);
+    const [speed, setSpeed] = useState(1);
+    const [muted, setMuted] = useState(false);
 
-    const togglePlay = () => {
-        setPlayerState({
-            ...playerState,
-            isPlaying : !playerState.isPlaying,
-        });
+    const togglePlay = () => {  
+        //play/pause
+        setPlaying(!playing);
     };
 
     useEffect(() => {
-        //om den spelas så pausa annars spela första gången den skapas
-        playerState.isPlaying ? videoContent.current.play() : videoContent.current.pause();
-    }, [playerState.isPlaying, videoContent]);
+        //If playing, pause and if paused, play.
+        playing ? videoContent.current.play() : videoContent.current.pause();
+    }, [playing, videoContent]);
 
     const handleOnTimeUpdate = () => {
         //video progressbar
         const progress = (videoContent.current.currentTime / videoContent.current.duration) * 100;
-        setPlayerState({
-            ...playerState,
-            progress,
-        });
+        setProgress(progress);
     };
 
     const handleVideoProgress = (event) => {
-        //så man kan ändra tid genom progressbaren
+        //Makes it possible to manually change the progressbar of the video.
         const manualChange = Number(event.target.value);
         videoContent.current.currentTime = (videoContent.current.duration / 100) * manualChange;
-        setPlayerState({
-            ...playerState,
-            progress: manualChange,
-        });
+        setProgress(manualChange);
     };
 
     const handleVideoSpeed = (event) => {
-        //ändra hastigheten 1.0x = 1.25x tex
+        //Change the video playing speed.
         const speed = Number(event.target.value);
         videoContent.current.playbackRate = speed;
-        setPlayerState({
-            ...playerState,
-            speed,
-        });
+        setSpeed(speed);
     };
 
     const toggleMute = () => {
-        //stäng av / på ljudet
-        setPlayerState({
-            ...playerState,
-            isMuted: !playerState.isMuted,
-        });
+        //mute/unmute
+        setMuted(!muted);
     };
 
     useEffect(() => {
-         playerState.isMuted ? (videoContent.current.muted = true) : (videoContent.current.muted = false);
+         muted ? (videoContent.current.muted = true) : (videoContent.current.muted = false);
         
-    }, [playerState.isMuted, videoContent]);
+    }, [muted, videoContent]);
 
     return {
-        playerState,
+        playing,
+        progress,
+        speed,
+        muted,
         togglePlay,
         handleOnTimeUpdate,
         handleVideoProgress,

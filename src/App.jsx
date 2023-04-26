@@ -10,7 +10,11 @@ const App = () => {
 
   const videoElement = useRef(null);
   const {
-    playerState,
+    //all the variables and funktions imported from the videoplayer.
+    playing,
+    speed,
+    muted,
+    progress,
     togglePlay,
     handleOnTimeUpdate,
     handleVideoProgress,
@@ -29,19 +33,19 @@ const App = () => {
         <div className='controls'>
           <div className='actions'>
             <div onClick={togglePlay} className='play-pause'>
-              {playerState.isPlaying ? 'Pause' : 'Play'}
+              {playing ? 'Pause' : 'Play'}
             </div>
           </div>
           <input 
             type="range"
             min="0"
             max="100"
-            value={playerState.progress}
+            value={progress}
             onChange={(e) => handleVideoProgress(e)} 
           />
           <select
             className='velocity' 
-            value={playerState.speed}
+            value={speed}
             onChange={(e) => handleVideoSpeed(e)}
           >
             <option value="0.50">0.50x</option>
@@ -51,7 +55,7 @@ const App = () => {
             <option value="2">2x</option>
           </select>
           <div onClick={toggleMute} className="mute-btn">
-            {playerState.isMuted ? 'Unmute' : 'Mute'}
+            {muted ? 'Unmute' : 'Mute'}
           </div>
         </div>
       </div>
