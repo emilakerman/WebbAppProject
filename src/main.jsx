@@ -14,5 +14,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
        <HomePage />
        {/* <MovieCard /> */}
     </Router>
-  </React.StrictMode>,
-)
+
