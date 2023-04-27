@@ -1,6 +1,7 @@
 import React from "react";
 import MovieThumb from "./MovieThumb";
 import { useState, useEffect } from "react";
+import Searchbar from './Searchbar'
 
 
 
@@ -21,10 +22,13 @@ const HomePage = (props) => {
     }, []);
 
     return (
-        <div id='movieContainer'>
-            {movies.map((movie) => (
-                <MovieThumb key={movie.id} movie={movie}/>
-            ))};
+        <div>
+            <Searchbar />
+            <div id='movieContainer'>
+                {movies.map((movie) => (
+                    <MovieThumb key={movie.id} movie={movie}/>
+                ))};
+            </div>
         </div>
     )
 }

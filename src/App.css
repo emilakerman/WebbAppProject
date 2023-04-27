@@ -122,6 +122,20 @@ body {
     font-size: 2rem;
     font-weight: bold;
   }
+  /* search stuff */
+  .searchContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  .searchBar {
+    text-align: center;
+    width: 20em;
+    height: 2em;
+    border-radius: 7px;
+  }
 /* mobile below */
 @media only screen and (max-width: 768px) {
 .outerContainer {
