@@ -7,7 +7,7 @@ import Searchbar from './Searchbar'
 
 const HomePage = (props) => {
 
-    const apiURL = 'https://api.themoviedb.org/3/trending/movie/week?api_key=128373ab4341186161d282674c1d9e7b';
+    const apiURL = 'https://api.themoviedb.org/3/trending/movie/day?api_key=128373ab4341186161d282674c1d9e7b';
     const [movies, setMovies] = useState([]);
 
     const fetchMovies = async () => {
