@@ -1,6 +1,6 @@
 
 
-///search api
+///not using this yet, but leave it here for now
 
 let searchAPI = `https://api.themoviedb.org/3/search/movie?query=${searchKeyword}&api_key=128373ab4341186161d282674c1d9e7b`;
 
