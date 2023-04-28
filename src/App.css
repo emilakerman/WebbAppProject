@@ -323,4 +323,9 @@ button {
   cursor: pointer;
   margin-left: 10px;
 }
+.searchIcon {
+  padding-left: 20px;
+  width: 20px;
+  height: 20px;
+}
 
