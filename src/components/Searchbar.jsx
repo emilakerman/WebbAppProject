@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 
 const Searchbar = () => {
 
-    //emil
-
     let searchAPI = `https://api.themoviedb.org/3/search/movie?api_key=128373ab4341186161d282674c1d9e7b`;
 
     const [movies, setMovies] = useState([]);
@@ -14,17 +12,10 @@ const Searchbar = () => {
         const response = await fetch(`${searchAPI}&query=${searchKeyword}`);
         const data = await response.json();
     
-        console.log(data);
-        setMovies(data.Search);
+        console.log(data.results);
+
+        setMovies(data.results);
     }
-
-    //end emil
-
-//   const [searchQuery, setSearchQuery] = useState("");
-
-//   const handleMovieSearch = (movieResult) => {
-//     setSearchQuery(movieResult.target.value);
-//   };
 
   return (
     <div className="input-container">
