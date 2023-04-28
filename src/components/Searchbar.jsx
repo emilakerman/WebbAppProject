@@ -27,19 +27,18 @@ const Searchbar = () => {
 //   };
 
   return (
-    <div className="searchContainer">
-        <input
-            className="searchBar"
-            placeholder='Search for movies and tv shows here'
+    <div className="input-container">
+        <input 
+            type="text" 
+            className="input-field" 
+            placeholder="Search for movies..."
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-        />
+            onChange={(e) => setSearchTerm(e.target.value)}/>
         <img 
-            className="searchIcon"
-            src="https://cdn-icons-png.flaticon.com/512/3917/3917754.png"
-            alt="search"
-            onClick={() => handleMovieSearch(searchTerm)}
-        />
+            onClick={() => handleMovieSearch(searchTerm)} 
+            src="https://cdn-icons-png.flaticon.com/512/3917/3917754.png" 
+            alt="Search" 
+            className="search-icon"/>
     </div>
   );
 };
