@@ -10,8 +10,8 @@ import MovieCard from './components/MovieCard'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Router>
-       {/* <App /> */}
-       <HomePage />
+       <App />
+       {/* <HomePage /> */}
        {/* <MovieCard /> */}
     </Router>
 </React.StrictMode>

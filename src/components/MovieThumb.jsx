@@ -1,16 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import '.././App.css'
-import { useNavigate } from "react-router-dom";
-import Router from "router";
+import { Link } from "react-router-dom";
 
 const MovieThumb = ({movie}) => {
-
-    const navigate = useNavigate();
-
-    const handleClick = (id) => {
-        navigate(`/movies/${id}`);
-      }
 
     return (
         <div className='movie'>
@@ -18,12 +11,13 @@ const MovieThumb = ({movie}) => {
                 <p>Click for more info</p>
             </div>
             <div>
-            <img 
+            <Link to={`/movies/${movie.id}`} state={{ title: movie.title, release_date: movie.release_date, img: movie.backdrop_path, genre: movie.genre_ids[0] }}>
+                <img 
                 src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${movie.backdrop_path}`} 
                 alt='Movie Image'
                 onError={(e) => { e.target.onerror = null; e.target.src = 'https://i.imgur.com/rnnnNuu.png' }}
-                onClick={() => handleClick(movie.id)} //click here on a movie in the list
                 />
+            </Link>
             </div>
             <div>
                 <h3>{movie.title}</h3>
