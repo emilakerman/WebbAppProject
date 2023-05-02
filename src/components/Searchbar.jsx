@@ -17,6 +17,8 @@ const Searchbar = () => {
         setMovies(data.results);
     }
 
+  
+
   return (
     <>
     <div className="input-container">
