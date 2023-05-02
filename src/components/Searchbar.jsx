@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import MovieThumb from "./MovieThumb";
 // import {motion} from "framer-motion"
+import GenreButtons from './GenreButtons'
+
 
 const Searchbar = () => {
 
@@ -16,9 +18,6 @@ const Searchbar = () => {
     
         setMovies(data.results);
     }
-
-  
-
   return (
     <>
     <div className="input-container">
@@ -34,6 +33,7 @@ const Searchbar = () => {
             alt="Search" 
             className="search-icon"/>
     </div>
+    {/* <GenreButtons /> */}
         <div id='movieContainer'>
             {movies.map((movie) => (
                 <MovieThumb key={movie.id} movie={movie}/>

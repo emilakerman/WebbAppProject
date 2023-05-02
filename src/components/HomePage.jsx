@@ -2,7 +2,7 @@ import React from "react";
 import MovieThumb from "./MovieThumb";
 import { useState, useEffect } from "react";
 import Searchbar from './Searchbar'
-
+import GenreButtons from './GenreButtons'
 
 
 const HomePage = (props) => {
@@ -50,13 +50,14 @@ const HomePage = (props) => {
     return (
         <div>
             <Searchbar />
-            <div class="button-container">
-                <button onClick={() => changeList('trending')}class="button">Trending</button>
-                <button onClick={() => changeList('comedy')}class="button">Comedy</button>
-                <button onClick={() => changeList('action')}class="button">Action</button>
-                <button onClick={() => changeList('drama')}class="button">Drama</button>
-                <button onClick={() => changeList('horror')}class="button">Horror</button>
-                <button onClick={() => changeList('scifi')}class="button">Sci-Fi</button>
+            {/* <GenreButtons /> */}
+            <div className="button-container">
+                <button onClick={() => changeList('trending')}className="button">Trending</button>
+                <button onClick={() => changeList('comedy')}className="button">Comedy</button>
+                <button onClick={() => changeList('action')}className="button">Action</button>
+                <button onClick={() => changeList('drama')}className="button">Drama</button>
+                <button onClick={() => changeList('horror')}className="button">Horror</button>
+                <button onClick={() => changeList('scifi')}className="button">Sci-Fi</button>
             </div>
             <div id='movieContainer'>
                 {movies.map((movie) => (
