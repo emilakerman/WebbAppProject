@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import MovieThumb from "./MovieThumb";
+// import {motion} from "framer-motion"
 
 const Searchbar = () => {
 
@@ -18,6 +20,7 @@ const Searchbar = () => {
     }
 
   return (
+    <>
     <div className="input-container">
         <input 
             type="text" 
@@ -31,6 +34,12 @@ const Searchbar = () => {
             alt="Search" 
             className="search-icon"/>
     </div>
+        <div id='movieContainer'>
+            {movies.map((movie) => (
+                <MovieThumb key={movie.id} movie={movie}/>
+            ))};
+        </div>
+    </>
   );
 };
 
