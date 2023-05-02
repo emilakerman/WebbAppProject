@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom'
 
 const MovieCard = () => {
   const location = useLocation()
-  let { title, release_date, img, genre } = location.state
+  let { title, release_date, img, genre, overview, score } = location.state
 
   switch (genre) {
     case 28:
@@ -78,11 +78,11 @@ const MovieCard = () => {
         </div>
         <div className="rightSection">
           <h2 className='movie-tagline'>{title}</h2>
-          <p className='movie-info'>Longer movie description about some stuff that I probablby wont read bit ts good to put in the code anyway I think.</p>
+          <p className='movie-info'>{overview}</p>
           <div className='genreReleaseContainer'>
             <h3>{genre}</h3>
             <h3>{release_date}</h3>
-            <h3>9.7</h3>
+            <h3>{score}</h3>
           </div>
           <button>Rent & Watch Online</button>
         </div>

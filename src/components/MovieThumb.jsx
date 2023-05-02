@@ -11,7 +11,9 @@ const MovieThumb = ({movie}) => {
                 <p>Click for more info</p>
             </div>
             <div>
-            <Link to={`/movies/${movie.id}`} state={{ title: movie.title, release_date: movie.release_date, img: movie.backdrop_path, genre: movie.genre_ids[0] }}>
+            <Link to={`/movies/${movie.id}`} state={{ title: movie.title, release_date: movie.release_date, 
+                                                    img: movie.backdrop_path, genre: movie.genre_ids[0], 
+                                                    overview: movie.overview, score: movie.vote_average }}>
                 <img 
                 src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${movie.backdrop_path}`} 
                 alt='Movie Image'
