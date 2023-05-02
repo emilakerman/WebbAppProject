@@ -27,7 +27,7 @@ const HomePage = (props) => {
             <div id='movieContainer'>
                 {movies.map((movie) => (
                     <MovieThumb key={movie.id} movie={movie}/>
-                ))};
+                ))}
             </div>
         </div>
     )

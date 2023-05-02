@@ -14,8 +14,6 @@ const Searchbar = () => {
         const response = await fetch(`${searchAPI}&query=${searchKeyword}`);
         const data = await response.json();
     
-        console.log(data.results);
-
         setMovies(data.results);
     }
 
@@ -37,7 +35,7 @@ const Searchbar = () => {
         <div id='movieContainer'>
             {movies.map((movie) => (
                 <MovieThumb key={movie.id} movie={movie}/>
-            ))};
+            ))}
         </div>
     </>
   );
