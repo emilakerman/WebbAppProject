@@ -1,6 +1,7 @@
 import React from "react";
 import MovieThumb from "./MovieThumb";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom"
 
 
 
