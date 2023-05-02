@@ -2,7 +2,18 @@
 body {
     font-family: var(--font-roboto);
 
-    background: linear-gradient(to bottom, #9da1a7, #2c3e50);
+    background: linear-gradient(
+      45deg,
+      #7b0505,
+      #6c3304,
+      #706e0c,
+      #2f352d,
+      #831fa1,
+      #0d2082,
+      #7a00ff,
+      #6e0858,
+      #760303
+    );
   }
 #movieContainer {
     display: flex;
