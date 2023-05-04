@@ -154,7 +154,8 @@ body {
 }
 
 .movie-page {
-  background-color: #242424;
+
+  background: linear-gradient(to bottom right, #000, #111 20%, #3f0a43 50%, #111 80%, #000);  
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -310,85 +311,128 @@ body {
     
 /* mobile below */
 @media only screen and (max-width: 768px) {
-.outerContainer {
+  .outerContainer {
+    background-color: #1C1C1C;
+    padding: 30px;
     display: flex;
-    align-items: center;
     justify-content: center;
-    margin-top: 20px;
+    align-items: center;
   }
   
   .movie-page {
+    background: linear-gradient(to bottom right, #000, #111 20%, #3f0a43 50%, #111 80%, #000);  
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    width: 90%;
-    max-width: 400px;
-    height: auto;
-    background: linear-gradient(to right, rgba(195, 20, 50, 0.8), rgba(36, 11, 54, 0.8));
-    border-radius: 20px;
-    box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .imageSection {
+    flex-basis: 30%;
+    max-height: 500px;
     overflow: hidden;
   }
   
   .imageSection img {
     width: 100%;
-    height: 30em;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .imageSection img:hover {
+    transform: scale(1.1);
   }
   
   .rightSection {
-    text-align: center;
-  }
-  .genreReleaseContainer {
-    margin-top: -20px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-  h1 {
-    margin-top: 0;
+    flex-basis: 60%;
+    padding: 20px;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
   
   .movie-tagline {
-    margin-top: -10px;
-    font-size: 2rem;
-    font-weight: bold;
+    font-size: 30px;
+    color: #FFFFFF;
+    margin: 0;
+    margin-bottom: 10px;
   }
   
   .movie-info {
-    margin-top: -20px;
+    font-size: 18px;
+    color: #CCCCCC;
+    margin: 0;
+    margin-bottom: 20px;
   }
   
-  .movie-genres {
+  .genreReleaseContainer {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 10px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
   }
   
-  .movie-genres p {
-    margin: 5px;
-    padding: 5px 10px;
-    border-radius: 20px;
-    background-color: #fff;
-    color: #000;
-    font-size: 0.8rem;
+  .genreReleaseContainer h3 {
+    font-size: 16px;
+    color: #CCCCCC;
+    margin: 0;
+  }
+  
+  #rentWatchButton {
+    border: none;
+    padding: 10px 20px;
+    background-color: #8B008B;
+    color: #FFFFFF;
+    font-size: 16px;
     font-weight: bold;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
   }
   
-  .movie-overview {
-    margin-top: 20px;
+  #rentWatchButton:hover {
+    background-color: #9932CC;
   }
   
-  .movie-overview h2 {
-    margin-bottom: 10px;
+  .outerContainer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to right, transparent, #1C1C1C);
+    z-index: -1;
   }
   
-  .movie-credits {
-    margin-top: 20px;
+  .movie-page::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background-image: linear-gradient(to right, rgba(139, 0, 139, 0.8), transparent);
+    z-index: -1;
   }
   
-  .movie-credits h2 {
-    margin-bottom: 10px;
+  @media (max-width: 768px) {
+    .movie-page {
+      flex-direction: column;
+    }
+    .imageSection {
+      max-height: 300px;
+    }
+    .rightSection {
+      flex-basis: 100%;
+      padding: 20px;
+    }
   }
+  
 }
 button {
     display: inline-block;
