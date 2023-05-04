@@ -8,7 +8,9 @@ import './navbar.css'
 import MovieThumb from './components/MovieThumb'
 import HomePage from './components/HomePage'
 import MovieCard from './components/MovieCard'
+import ShoppingCart from './components/ShoppingCart'
 import LogIn from './components/LogIn'
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -16,7 +18,12 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
        <App />
        {/* <HomePage /> */}
-       {/* <MovieCard /> */}
+     {/*  <MovieCard /> */}
+    // <ShoppingCart />
+
+
+    </Router>
+
 
 
     </Router>
