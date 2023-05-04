@@ -6,13 +6,17 @@ import {HashRouter as Router } from 'react-router-dom'
 import MovieThumb from './components/MovieThumb'
 import HomePage from './components/HomePage'
 import MovieCard from './components/MovieCard'
+import ShoppingCart from './components/ShoppingCart'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Router>
        {/* <App /> */}
        {/* <HomePage /> */}
-       <MovieCard />
+     {/*  <MovieCard /> */}
+     <ShoppingCart />
+
+
     </Router>
 
 </React.StrictMode>)
