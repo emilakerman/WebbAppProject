@@ -30,9 +30,9 @@ body {
   grid-template-columns: 1fr 1fr;
 }
   
-  .movie {
-    width: 310px;
-    height: 460px;
+  .movie { /* this is changed from the original file */ 
+    width: 155px;
+    height: 230px;
     margin: 5px;
     position: relative;
     border-radius: 12px;

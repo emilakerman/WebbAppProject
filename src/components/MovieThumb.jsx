@@ -5,10 +5,30 @@ import { Link } from "react-router-dom";
 
 const MovieThumb = ({movie}) => {
 
+        const [isPressed, setIsPressed] = useState(false);
+      
+        let timeoutId;
+      
+        const handleTouchStart = () => {
+          timeoutId = setTimeout(() => {
+            setIsPressed(true);
+          }, 1000); // change this value to adjust the duration of the long press
+        };
+      
+        const handleTouchEnd = () => {
+          clearTimeout(timeoutId);
+          setIsPressed(false);
+        };
+    
+
     return (
-        <div className='movie'>
+        <div       
+        className='movie'
+        // className={isPressed ? 'movieDynamic' : 'movie'}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}>
             <div>
-                <p>Click for more info</p>
+                <p></p>
             </div>
             <div>
             <Link to={`/movies/${movie.id}`} state={{ title: movie.title, release_date: movie.release_date, 

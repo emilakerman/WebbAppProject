@@ -46,6 +46,20 @@ const HomePage = (props) => {
             break;
         }
     }
+    const [isPressed, setIsPressed] = useState(false);
+      
+    let timeoutId;
+  
+    const handleTouchStart = () => {
+      timeoutId = setTimeout(() => {
+        setIsPressed(true);
+      }, 1000); // change this value to adjust the duration of the long press
+    };
+    const handleTouchEnd = () => {
+        import('.././DynamicCss.css'); //changes stylesheet while longpress!!! working
+        clearTimeout(timeoutId);
+        setIsPressed(false);
+    };
 
     return (
         <div>
@@ -59,7 +73,10 @@ const HomePage = (props) => {
                 <button onClick={() => changeList('horror')}className="button">Horror</button>
                 <button onClick={() => changeList('scifi')}className="button">Sci-Fi</button>
             </div>
-            <div id='movieContainer'>
+            <div        
+        id={isPressed ? 'movieContainer' : 'movieContainer'}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}>
                 {movies.map((movie) => (
                     <MovieThumb key={movie.id} movie={movie}/>
                 ))}
