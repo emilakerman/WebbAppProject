@@ -1,6 +1,12 @@
 
-import { useState, useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
+
+import Navbar from './components/Navbar'
+import HomePage from "./components/HomePage"
+import AboutUsPage from "./components/AboutUsPage"
+
+
 import axios from 'redaxios'; //external api fetch library (replacing fetch, this is more light weight apparently)
 import './App.css';
 import handleSubmit from './handles/handlesubmit';
@@ -11,58 +17,34 @@ import { Route, Routes } from 'react-router-dom'
 import MovieCard from './components/MovieCard';
 import HomePage from './components/HomePage';
 
-//Omdb api url
-let apiURL = "http://www.omdbapi.com/?apikey=9875f2c9";
-
-//TMD api key
-//128373ab4341186161d282674c1d9e7b
 
 
 
-// let title = "Batman"; //just using this now for static testing
 
-//const App = () => {
 
-//   useEffect(() => {
-//     fetchData(title);
-//   }, []);
 
-//   const fetchData = (title) => {
-//     axios.get(`${apiURL}&s=${title}`)
-//     .then((response) => {
-//       for (const movie in response.data.Search) {
-//         console.log(response.data.Search[movie].Title) //logs out a bunch of batman movies
-//       }
-//     })
-//     .catch((error) => {
-//       ///various error handling
-//         if (error.response) {
-//         console.log(error.response.data);
-//         console.log(error.response.status);
-//         console.log(error.response.headers);
-//         } else if (error.request) {
-//         console.log(error.request);
-//         } else {
-//         console.log('Error', error.message);
-//         }
+
+function App() {
+  return (
+
+    <>
+      <Navbar />
+
+
+    <div>
+      <Routes>
+        <Route path="/" element={<HomePage/>}></Route>
+        <Route path="/movies/:movieId" element={<MovieCard/>}></Route>
+        <Route path="AboutUs" element={<AboutUsPage/>}></Route>
+      </Routes>
+    </div>
+    </>
+  );
     
-//     })
-//     .finally(function () {
-//         // always executed, not used right now
-//     }); 
-// }
-
-//  return(
-//    <h1>hej</h1>
-//  )
-
-
-
-
-
-const App = () => {
-
-  // const videoElement = useRef(null);
+}
+  
+  
+    // const videoElement = useRef(null);
   // const {
   //   //all the variables and functions imported from the videoplayer.
   //   playing,
@@ -76,14 +58,6 @@ const App = () => {
   //   toggleMute,
   // } = VideoPlayer(videoElement);
 
-  return (
-    <div>
-      <Routes>
-        <Route path="/" element={<HomePage/>}></Route>
-        <Route path="/movies/:movieId" element={<MovieCard/>}></Route>
-      </Routes>
-    </div>
-  );
   //   <div className='container'>
   //     <div className='video-wrapper'>
   //       <video 
@@ -132,23 +106,7 @@ const App = () => {
 
 
 
-/* Firebase test */
 
-/*   const dataRef = useRef()
- 
-  const submithandler = (e) => {
-    e.preventDefault()
-    handleSubmit(dataRef.current.value)
-    dataRef.current.value = ""
-  }
-return (
-      <div className="App">
-        <form onSubmit={submithandler}>
-          <input type= "text" ref={dataRef} />
-          <button type = "submit">Save</button>
-        </form>
-      </div>
-    ); */
-}
+
 
 export default App

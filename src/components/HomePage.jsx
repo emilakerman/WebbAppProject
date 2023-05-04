@@ -1,8 +1,10 @@
 import React from "react";
 import MovieThumb from "./MovieThumb";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom"
 import Searchbar from './Searchbar'
 import GenreButtons from './GenreButtons'
+
 
 
 const HomePage = (props) => {
