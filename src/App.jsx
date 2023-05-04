@@ -10,6 +10,7 @@ import { useRef } from 'react';
 import VideoPlayer from './components/VideoPlayer';
 import video from "./assets/sample_mp4.mp4";
 import MovieCard from './components/MovieCard';
+import LogIn from './components/LogIn';
 
 
 
@@ -30,7 +31,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage/>}></Route>
         <Route path="/movies/:movieId" element={<MovieCard/>}></Route>
-        <Route path="AboutUs" element={<AboutUsPage/>}></Route>
+        <Route path="/AboutUsPage" element={<AboutUsPage/>}></Route>
+        <Route path="/LogIn" element={<LogIn />}></Route>
       </Routes>
     </div>
     </>
