@@ -15,7 +15,7 @@ import LogIn from './components/LogIn'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Router>
-       <App />
+        <App />
        {/* <HomePage /> */}
        {/*  <MovieCard /> */}
        {/*  <ShoppingCart /> */}
