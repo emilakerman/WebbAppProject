@@ -19,10 +19,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
        <App />
        {/* <HomePage /> */}
      {/*  <MovieCard /> */}
-    // <ShoppingCart />
+    {/*  <ShoppingCart /> */}
 
 
-    </Router>
+
 
 
 
