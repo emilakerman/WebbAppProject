@@ -1,4 +1,7 @@
+
 import React, { useState } from "react";
+import { getAuth } from "firebase/auth";
+
 
 const ShoppingCart = () => {
 const [cartItems, setCartItems] = useState([
@@ -14,6 +17,7 @@ const removeMovie = (index) => {
     newCartItems.splice(index, 1)
     setCartItems(newCartItems);
 };
+
 
 const totalPrice = cartItems.reduce((total, movie) => total + movie.price, 0);
 return (
@@ -33,6 +37,17 @@ return (
         <button>Go to checkout</button>
     </div>
 )
+
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (user) {
+    // User signed in. TODO: Get users cart.
+    } else {
+    // No user is signed in: Empty cart
+    }
+
+
 }
 
 export default ShoppingCart;
