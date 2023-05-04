@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
@@ -66,3 +67,4 @@ const LogIn = () => {
 };
 
 export default LogIn;
+
