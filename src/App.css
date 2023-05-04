@@ -64,8 +64,9 @@ body {
   .movie div:nth-of-type(3) {
     z-index: 2;
     background: linear-gradient(to bottom, #3c3e40, #303b46);
-    padding: 0px 0px 5px 24px;
+    padding: 16px 24px 24px 24px;
     position: absolute;
+    /* margin-bottom: 0px; */
     bottom: 0;
     right: 0;
     left: 0;
