@@ -104,13 +104,14 @@ body {
 
   
   /* single view card */
-  .outerContainer {
+  /* .outerContainer {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 30px;
   }
   .movie-page {
+    color: white;
     border: none;
     border-radius: 50px;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
@@ -141,7 +142,120 @@ body {
     margin-top: 40%;
     font-size: 2rem;
     font-weight: bold;
-  }
+  } */
+
+/* second attempt */
+.outerContainer {
+  background-color: #1C1C1C;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.movie-page {
+  background-color: #242424;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.imageSection {
+  flex-basis: 30%;
+  overflow: hidden;
+}
+
+.imageSection img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s ease-in-out;
+}
+
+.imageSection img:hover {
+  transform: scale(1.1);
+}
+
+.rightSection {
+  flex-basis: 60%;
+  padding: 20px;
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.movie-tagline {
+  font-size: 30px;
+  color: #FFFFFF;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.movie-info {
+  font-size: 18px;
+  color: #CCCCCC;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.genreReleaseContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.genreReleaseContainer h3 {
+  font-size: 16px;
+  color: #CCCCCC;
+  margin: 0;
+}
+
+#rentWatchButton {
+  border: none;
+  padding: 10px 20px;
+  background-color: #8B008B;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+#rentWatchButton:hover {
+  background-color: #9932CC;
+}
+
+.outerContainer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to right, transparent, #1C1C1C);
+  z-index: -1;
+}
+
+.movie-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background-image: linear-gradient(to right, rgba(139, 0, 139, 0.8), transparent);
+  z-index: -1;
+}
+
+
+
+
   /* search stuff */
   /* .searchContainer {
     display: flex;

@@ -84,7 +84,7 @@ const MovieCard = () => {
             <h3>{release_date}</h3>
             <h3>{score}</h3>
           </div>
-          <button>Rent & Watch Online</button>
+          <button id="rentWatchButton">Rent & Watch Online</button>
         </div>
       </div>
     </div>
