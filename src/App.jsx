@@ -1,21 +1,15 @@
 
 import { Route, Routes } from 'react-router-dom'
-import './App.css'
-
 import Navbar from './components/Navbar'
 import HomePage from "./components/HomePage"
 import AboutUsPage from "./components/AboutUsPage"
-
-
 import axios from 'redaxios'; //external api fetch library (replacing fetch, this is more light weight apparently)
 import './App.css';
 import handleSubmit from './handles/handlesubmit';
 import { useRef } from 'react';
 import VideoPlayer from './components/VideoPlayer';
 import video from "./assets/sample_mp4.mp4";
-import { Route, Routes } from 'react-router-dom'
 import MovieCard from './components/MovieCard';
-import HomePage from './components/HomePage';
 
 
 
@@ -23,6 +17,7 @@ import HomePage from './components/HomePage';
 
 
 
+ 
 
 function App() {
   return (

@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import  Searchbar from './Searchbar';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { Link } from "react-router-dom"
-import Searchbar from './Searchbar'
 import GenreButtons from './GenreButtons'
 
 
@@ -97,7 +96,7 @@ const HomePage = (props) => {
                 <button onClick={() => changeList('horror')}className="button">Horror</button>
                 <button onClick={() => changeList('scifi')}className="button">Sci-Fi</button>
             </div>
-            <div        
+            <div     
         id={isPressed ? 'movieContainer' : 'movieContainer'}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}>
@@ -107,7 +106,7 @@ const HomePage = (props) => {
             </div>
 
         </div>
-        </div>
+
     )
 }
 
