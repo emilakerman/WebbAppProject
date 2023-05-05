@@ -1,9 +1,21 @@
 import '.././App.css'
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom'
+import { getAuth } from "firebase/auth";
 
 
 const MovieCard = () => {
+  const [user, setUser] = useState(null);//keeps track of the userobj
+
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      console.log("useEffect moviecard user ChangeState");
+      setUser(user); 
+    });
+    return unsubscribe;
+  }, []);
+
   const location = useLocation()
   let { title, release_date, img, genre, overview, score } = location.state
 
@@ -84,7 +96,14 @@ const MovieCard = () => {
             <h3>{release_date}</h3>
             <h3>{score}</h3>
           </div>
-          <button>Rent & Watch Online</button>
+          {user ? (
+            <div>
+              <button>Rent & Watch Online</button>
+            </div>
+          ) : (
+              <button>Log in to rent</button>
+          )}
+          
         </div>
       </div>
     </div>
