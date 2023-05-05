@@ -147,7 +147,10 @@ body {
 /* second attempt */
 .outerContainer {
   background-color: #1C1C1C;
-  padding: 30px;
+  padding-left: 150px;
+  padding-right: 150px;
+  padding-top: 30px;
+  padding-bottom: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
