@@ -10,7 +10,6 @@ const LogIn = () => {
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      console.log("Changed user state useEffect")
       setUser(user); // set user state to user object or null if user is not logged in
     });
     return unsubscribe;

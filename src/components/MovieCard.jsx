@@ -2,19 +2,50 @@ import '.././App.css'
 import React, { useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom'
 import { getAuth } from "firebase/auth";
+import { getFirestore, collection, addDoc, doc } from "firebase/firestore";
+import { Link } from "react-router-dom"
 
 
 const MovieCard = () => {
   const [user, setUser] = useState(null);//keeps track of the userobj
 
   useEffect(() => {
+    //Checks for userchanges log in changes
     const auth = getAuth();
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      console.log("useEffect moviecard user ChangeState");
       setUser(user); 
     });
     return unsubscribe;
   }, []);
+
+  const handleRentMovie = () =>{
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
+
+    if(!currentUser){
+      alert("Please log in to rent!")
+      return;
+    }
+
+    const movieData = {
+      title: title,
+      genre: genre,
+      release_date: release_date,
+      score: score
+    };
+
+    const db = getFirestore();
+    const userRef = doc(db, "users", currentUser.uid);
+
+    const rentedMoviesRef = collection(userRef, "rentedMovies");
+    addDoc(rentedMoviesRef, movieData)
+      .then(() => {
+        alert("Movie added to cart!")
+      })
+      .catch((error) => {
+        console.error("Error adding the movie ", error);
+      });
+  };
 
   const location = useLocation()
   let { title, release_date, img, genre, overview, score } = location.state
@@ -96,12 +127,16 @@ const MovieCard = () => {
             <h3>{release_date}</h3>
             <h3>{score}</h3>
           </div>
+
+          {/* If user is logged in: Can rent. if not: Log in to rent */}
           {user ? (
             <div>
-              <button>Rent & Watch Online</button>
+              <button onClick={handleRentMovie}>Rent & Watch Online</button>
             </div>
           ) : (
-              <button>Log in to rent</button>
+            <button>
+              <Link to="/LogIn">Log in to rent</Link>
+            </button>
           )}
           
         </div>
