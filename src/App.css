@@ -21,6 +21,14 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-bottom: 10px;
+}
+.searchButtonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -7px;
+  margin-bottom: 10px;
 }
 
   

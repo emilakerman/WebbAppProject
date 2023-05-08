@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import MovieThumb from "./MovieThumb";
-// import {motion} from "framer-motion"
 import GenreButtons from './GenreButtons'
 
 
@@ -18,6 +17,29 @@ const Searchbar = () => {
     
         setMovies(data.results);
     }
+    const clearAll = () => {
+        setMovies([])
+        setSearchTerm('')
+    }
+    const Content = () => {
+        return (
+            <div id='movieContainer'>
+                {movies.map((movie) => (
+                    <MovieThumb key={movie.id} movie={movie}/>
+                ))}
+            </div>
+        )
+    }
+    let content = null;
+    if (movies.length != 0) {
+        content = 
+        <div>
+            <div className="searchButtonContainer">
+                <button onClick={() => clearAll()} className="clearSearchButton">Clear search</button>
+            </div>
+            <Content />
+        </div>
+    }
   return (
     <>
     <div className="input-container">
@@ -33,12 +55,7 @@ const Searchbar = () => {
             alt="Search" 
             className="search-icon"/>
     </div>
-    {/* <GenreButtons /> */}
-        <div id='movieContainer'>
-            {movies.map((movie) => (
-                <MovieThumb key={movie.id} movie={movie}/>
-            ))}
-        </div>
+        {content}
     </>
   );
 };
