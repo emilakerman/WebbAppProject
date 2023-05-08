@@ -27,6 +27,7 @@ const ShoppingCart = () => {
     setShoppingCart(updatedCartItems);
   };
 
+  //todo- movie price
   const totalPrice = shoppingCart.reduce((total, movie) => total + movie.price, 0);
 
   return (
