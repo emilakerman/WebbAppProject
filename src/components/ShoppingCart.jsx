@@ -14,6 +14,7 @@ const ShoppingCart = () => {
         const rentedMoviesRef = collection(userRef, "rentedMovies");
         const snapshot = await getDocs(rentedMoviesRef);
         const cartItems = snapshot.docs.map((doc) => doc.data());
+        console.log(cartItems);
         setShoppingCart(cartItems);
       }
     };
@@ -21,14 +22,13 @@ const ShoppingCart = () => {
     fetchShoppingCart();
   }, [db]);
 
-  const removeMovie = (movieId) => {
-    console.log(movieId);
-    const updatedCartItems = shoppingCart.filter((item) => item.id !== movieId);
-    setShoppingCart(updatedCartItems);
+  const removeMovie = async (movie) => {
+    //todo: Remove movie
+
   };
 
-  //todo- movie price
-  const totalPrice = shoppingCart.reduce((total, movie) => total + movie.price, 0);
+  //todo- movie price/total price
+  const totalPrice = 0
 
   return (
     <div>
@@ -41,8 +41,8 @@ const ShoppingCart = () => {
           <ul>
             {shoppingCart.map((movie) => (
               <li key={movie.id}>
-                {movie.title} - {movie.price} $
-                <button onClick={() => removeMovie(movie.id)}>Remove</button>
+                {movie.title} - $
+                <button onClick={() => removeMovie(movie.title)}>Remove</button>
               </li>
             ))}
           </ul>
