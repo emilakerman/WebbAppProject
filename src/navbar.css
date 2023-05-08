@@ -13,14 +13,12 @@ body {
   justify-content: space-between;
   align-items: stretch;
   gap: 2rem;
-  padding: 0 1rem;
+  padding: 0 2%;
 }
 
 .site-title {
   font-size: 3rem;
-  
 }
-
 
 .nav ul {
   padding: 0;
@@ -30,14 +28,13 @@ body {
   gap: 1rem;
 }
 
-
 .nav a {
   color: inherit;
   text-decoration: none;
   height: 100%;
   display: flex;
   align-items: center;
-  padding: .25rem;
+  padding: 0.25rem;
 }
 
 .nav li.active {
@@ -46,4 +43,22 @@ body {
 
 .nav li:hover {
   background-color: #777;
+}
+
+/* Media Query for phones */
+@media only screen and (max-width: 600px) {
+  .nav {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 2%;
+  }
+
+  .nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav li {
+    margin-top: 0.5rem;
+  }
 }
