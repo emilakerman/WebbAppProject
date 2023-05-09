@@ -8,6 +8,9 @@ export default function Navbar() {
       </Link>
       <ul>
         <li>
+           <Link to="/ShoppingCart">Shopping Cart</Link>
+        </li>
+        <li>
            <Link to="/AboutUsPage">About us</Link>
         </li>
         <li>
