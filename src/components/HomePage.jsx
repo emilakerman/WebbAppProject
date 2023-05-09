@@ -100,8 +100,9 @@ const HomePage = (props) => {
             </div>
             <div     
         id={isPressed ? 'movieContainer' : 'movieContainer'}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}>
+        // onTouchStart={handleTouchStart}
+        // onTouchEnd={handleTouchEnd}
+        >
                 {movies.map((movie) => (
                     <MovieThumb key={movie.id} movie={movie}/>
                 ))}
