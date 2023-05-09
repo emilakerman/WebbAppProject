@@ -30,6 +30,7 @@ const Searchbar = () => {
             </div>
         )
     }
+    //Clear search
     let content = null;
     if (movies.length != 0) {
         content = 
