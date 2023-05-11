@@ -1,4 +1,3 @@
-/* new stuff from 20223-05-11 below -emil */ 
 
 //this one is for the static lists on the first page
 export const fetchMovies = async (apiURL) => {
