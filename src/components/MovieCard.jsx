@@ -37,7 +37,7 @@ const MovieCard = () => {
     const db = getFirestore();
     const userRef = doc(db, "users", currentUser.uid);
 
-    const rentedMoviesRef = collection(userRef, "rentedMovies");
+    const rentedMoviesRef = collection(userRef, "shoppingCart");
     addDoc(rentedMoviesRef, movieData)
       .then(() => {
         alert("Movie added to cart!")
