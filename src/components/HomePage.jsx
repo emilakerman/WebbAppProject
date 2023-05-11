@@ -7,7 +7,7 @@ import { Link } from "react-router-dom"
 import GenreButtons from './GenreButtons'
 import '.././App.css';
 
-
+import { fetchMovies } from "./Services/ApiServices";
 
 
 
@@ -34,16 +34,13 @@ const HomePage = (props) => {
     const [apiURL, setapiURL] = useState('https://api.themoviedb.org/3/trending/movie/day?api_key=128373ab4341186161d282674c1d9e7b');
     const [movies, setMovies] = useState([]);
 
-    const fetchMovies = async () => {
-        const response = await fetch(apiURL);
-        const data = await response.json();
-
-        setMovies(data.results);
-    }
-
     useEffect(() => {
-        fetchMovies();
+        runFetch();
     }, [apiURL]);
+
+    const runFetch = async () => {
+            setMovies(await fetchMovies(apiURL));
+        }
 
     const changeList = (genre) => {
         switch (genre) {
