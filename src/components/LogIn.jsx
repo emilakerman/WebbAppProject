@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import Profile from "./Profile";
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
@@ -92,6 +93,7 @@ const LogIn = () => {
           {error && <p>{error}</p>}
         </div>
       )}
+        <Profile />
     </div>
   );
 };

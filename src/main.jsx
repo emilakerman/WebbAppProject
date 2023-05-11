@@ -16,8 +16,8 @@ import Payment from './components/Payment'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Router>
-        {/* <App /> */}
-      <Profile />
+        <App />
+      {/* <Profile /> */}
        {/* <HomePage /> */}
        {/*  <MovieCard /> */}
        {/*  <ShoppingCart /> */}
