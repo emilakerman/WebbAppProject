@@ -3,7 +3,7 @@ body {
     font-family: var(--font-roboto);
 
     background: linear-gradient( /* too much? */
-      45deg,
+      90deg,
       #7b0505,
       #6c3304,
       #706e0c,
