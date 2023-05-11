@@ -68,7 +68,12 @@ const LogIn = () => {
       setError(errorMessage);
     });
   };
-
+  let profile = null;
+  if (user) {
+    profile = (
+      <Profile />
+    )
+  }
   return (
     <div>
       {user ? (
@@ -93,7 +98,7 @@ const LogIn = () => {
           {error && <p>{error}</p>}
         </div>
       )}
-        <Profile />
+        {profile}
     </div>
   );
 };
