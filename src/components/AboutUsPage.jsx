@@ -13,7 +13,8 @@ function AboutUsPage() {
 
   return (
     <div>
-      <h1>Contact Information</h1>
+      <h1>Hello. Welcome to Big Buster Renthouse</h1>
+      <h2>If you need any help please feel free to contact us anytime!</h2>
       <ul>
         {contacts.map(contact => (
           <li key={contact.email}>
@@ -22,6 +23,7 @@ function AboutUsPage() {
             <p className="contact-info">Phone: {contact.phone}</p>
             <p className="contact-info">Location: {contact.Location}</p>
           </li>
+          
         ))}
       </ul>
     </div>
