@@ -34,6 +34,7 @@ const Profile = () => {
     const uploadAndSetProfilePic = () => {
         /* the onclick handler to upload profile picture to firebase storage (if we decide to do this) */
     }
+    const user = getAuth().currentUser;
   return (
     <div className="profileOuterContainer">
       <div className="profileContainer">
@@ -43,7 +44,7 @@ const Profile = () => {
             src="https://i.imgur.com/GZ0gah4.png" /*profile image from firebase storage?*/
             onClick={() => uploadAndSetProfilePic()}
           ></img>
-          <h3>Username/email</h3> {/*Username or email from firebaseAUTH*/}
+          <h3>{user.email}</h3> {/*Username or email from firebaseAUTH*/}
         </div>
         <div id="rentedLeftandReviewsRight">
         <div id="previouslyRented">
