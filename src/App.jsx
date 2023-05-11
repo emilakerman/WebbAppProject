@@ -20,6 +20,7 @@ import Payment from './components/Payment';
 
 
 
+
  
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         <Route path="/" element={<HomePage/>}></Route>
         <Route path="/movies/:movieId" element={<MovieCard/>}></Route>
         <Route path="/AboutUsPage" element={<AboutUsPage/>}></Route>
+        <Route path="/ShoppingCart" element={<ShoppingCart/>}></Route>
         <Route path="/LogIn" element={<LogIn />}></Route>
         <Route path="/ShoppingCart" element={<ShoppingCart/>}></Route>
         <Route path="/Payment" element={<Payment/>}></Route>

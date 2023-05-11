@@ -10,24 +10,6 @@ import GenreButtons from './GenreButtons'
 
 
 const HomePage = (props) => {
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-         if (user) {
-         // User is signed in
-         const uid = user.uid;
-
-         user.providerData.forEach((profile) => {
-         console.log("  Email: " + profile.email);
-         // console.log("  Photo URL: " + profile.photoURL);
-         // TODO: Display user name and stuff ?
-         })
-         
-         } else {
-         // User is signed out
-         // ...
-        }
-});
-
 
     const [apiURL, setapiURL] = useState('https://api.themoviedb.org/3/trending/movie/day?api_key=128373ab4341186161d282674c1d9e7b');
     const [movies, setMovies] = useState([]);

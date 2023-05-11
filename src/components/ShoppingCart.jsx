@@ -1,60 +1,87 @@
-import React, { useState } from "react";
-import { getAuth } from "firebase/auth";
-import { Link } from "react-router-dom"
-import '.././shoppingcart.css'
 
+import React, { useEffect, useState } from "react";
+import { getAuth } from "firebase/auth";
+import { getFirestore, doc, collection, getDocs, deleteDoc } from "firebase/firestore";
+import { Link } from "react-router-dom"
 
 const ShoppingCart = () => {
-    const [cartItems, setCartItems] = useState([
-        //Exempel filmer/pris, dem riktiga läggs till senare.
-        { title: "Movie 1 example", price: 4 },
-        { title: "Movie 2 example", price: 3 },
-        { title: "Movie 3 example", price: 6 },
-        { title: "Movie 4 example", price: 2 },
-        { title: "Movie 5 example", price: 6 }
-    ]);
+  const [shoppingCart, setShoppingCart] = useState([]);
+  const db = getFirestore();
 
-    const removeMovie = (index) => {
-        const newCartItems = [...cartItems];
-        newCartItems.splice(index, 1)
-        setCartItems(newCartItems);
+  useEffect(() => {
+    const fetchShoppingCart = async () => {
+      const user = getAuth().currentUser;
+      if (user) {
+        const userRef = doc(db, "users", user.uid);
+        const rentedMoviesRef = collection(userRef, "rentedMovies");
+        const snapshot = await getDocs(rentedMoviesRef);
+        const cartItems = snapshot.docs.map((doc) => doc.data());
+        setShoppingCart(cartItems);
+      }
     };
 
-    const totalPrice = cartItems.reduce((total, movie) => total + movie.price, 0);
+    fetchShoppingCart();
+  }, [db]);
 
-    const hasMoviesInCart = cartItems.length > 0;
+  const removeMovie = async (movieTitle) => {
+    try {
+      const user = getAuth().currentUser;
+      if (user) {
+        const userRef = doc(db, "users", user.uid);
+        const rentedMoviesRef = collection(userRef, "rentedMovies");
+        const querySnapshot = await getDocs(rentedMoviesRef);
 
-    return (
-        <div className="shopping-cart">
-            <h2>Shopping Cart</h2>
-            <div className="cart-info">
-                {hasMoviesInCart ?
-                <h3>Your added movies</h3>
-                :
-                <h3>You don't have any movies in your cart</h3>
-}
-                <ul>
-                    {cartItems.map((movie, index) => (
-                        <li key={index}>
-                            {movie.title} - {movie.price} $
-                            <button onClick={() => removeMovie(index)}>-</button>
-                        </li>
-                    ))}
-                </ul>
-                <Link to="/">
-                <button className="add-movie-button">Add more movies</button>
-                </Link>
-                <p>Total price: {totalPrice} $</p>
-                {hasMoviesInCart ?
-                    <Link to="/Payment">
-                        <button >Go to checkout</button>
-                    </Link>
-                    :
-                    <button disabled>Go to checkout</button>
-                }
-            </div>
+        querySnapshot.forEach((doc) => {
+          const movieData = doc.data();
+          if (movieData.title === movieTitle) {
+            deleteDoc(doc.ref);
+            console.log("Movie deleted!");
+          }
+        });
+
+        const updatedSnapshot = await getDocs(rentedMoviesRef);
+        const updatedCartItems = updatedSnapshot.docs.map((doc) => doc.data());
+        setShoppingCart(updatedCartItems);
+      }
+    } catch (error) {
+      console.error("Error removing movie:", error);
+    }
+  };
+
+  const totalPrice = 0;
+
+  return (
+    <div>
+      <h2>Shopping Cart</h2>
+      {shoppingCart.length === 0 ? (
+        <p>Your cart is empty. <br/>
+          <button>
+            <Link to="/">Rent more movies</Link>
+          </button>
+        </p>
+        
+      ) : (
+        <div>
+          <h3>Your added movies</h3>
+          <ul>
+            {shoppingCart.map((movie) => (
+              <li key={movie.id}>
+                {movie.title} - $
+                <button onClick={() => removeMovie(movie.title)}>Remove</button>
+              </li>
+            ))}
+          </ul>
+
+          <button>
+          <Link to="/">Rent more movies</Link>
+          </button>
+          
+          <p>Total price: {totalPrice} $</p>
+          <button>Go to checkout</button>
         </div>
-    );
-}
+      )}
+    </div>
+  );
+};
 
 export default ShoppingCart;
