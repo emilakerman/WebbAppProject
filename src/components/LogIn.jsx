@@ -68,6 +68,7 @@ const LogIn = () => {
       setError(errorMessage);
     });
   };
+  //show only profile section if user is logged in
   let profile = null;
   if (user) {
     profile = (
