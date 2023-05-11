@@ -1,21 +1,10 @@
-import { useState } from "react";
-/* test comment * test est*/ 
+import { useState, useEffect } from "react";
+import { getAuth } from "firebase/auth";
+import { getFirestore, doc, collection, getDocs, deleteDoc } from "firebase/firestore";
 
 const Profile = () => {
-    const randomKey = () => {
-        return Math.random().toString(36).substring(2, 9);
-    }
-    const uploadAndSetProfilePic = () => {
-        /* the onclick handler to upload profile picture to firebase storage (if we decide to do this) */
-    }
-  const [rented, setRented] = useState([
-    "Movie1",
-    "Movie2",
-    "Movie3",
-    "Movie4",
-    "Movie5",
-    "Movie6",
-  ]); //previously rented movies from firestore?
+  const db = getFirestore();
+  const [rented, setRented] = useState([]); //previously rented movies from firestore?
   const [reviews, setReviews] = useState([
     "Review1: 8/10",
     "Review2: 4/10",
@@ -23,6 +12,28 @@ const Profile = () => {
     "Review4: 1/10",
     "Review5: 10/10"
   ]); //reviews or maybe ratings of movies, also from firestore?
+
+  useEffect(() => {
+    const fetchShoppingCart = async () => {
+      const user = getAuth().currentUser;
+      if (user) {
+        const userRef = doc(db, "users", user.uid);
+        const rentedMoviesRef = collection(userRef, "rentedMovies");
+        const snapshot = await getDocs(rentedMoviesRef);
+        const cartItems = snapshot.docs.map((doc) => doc.data());
+        setRented(cartItems);
+      }
+    };
+
+    fetchShoppingCart();
+  }, [db]);
+
+    const randomKey = () => {
+        return Math.random().toString(36).substring(2, 9);
+    }
+    const uploadAndSetProfilePic = () => {
+        /* the onclick handler to upload profile picture to firebase storage (if we decide to do this) */
+    }
   return (
     <div className="profileOuterContainer">
       <div className="profileContainer">
@@ -38,7 +49,7 @@ const Profile = () => {
         <div id="previouslyRented">
             <h4>Previously rented:</h4>
             {rented.map((movie) => (
-                <div key={randomKey()}>{movie}, </div>
+                <div key={randomKey()}>{movie.title} </div>
             ))}
             </div>
         <div id="movieReviews">
