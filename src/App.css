@@ -2,8 +2,11 @@
 body {
     font-family: var(--font-roboto);
 
-    background: linear-gradient( /* too much? */
-      90deg,
+  }
+  .homepageBG {
+    padding-top: 1%;
+    background: linear-gradient(
+      45deg,
       #7b0505,
       #6c3304,
       #706e0c,
