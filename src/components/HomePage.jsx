@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import  Searchbar from './Searchbar';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { Link } from "react-router-dom"
-import GenreButtons from './GenreButtons'
 import '.././App.css';
 
 import { fetchMovies } from "./Services/ApiServices";

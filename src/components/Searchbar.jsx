@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import MovieThumb from "./MovieThumb";
-import GenreButtons from './GenreButtons'
 import { handleMovieSearch } from "./Services/ApiServices";
 
 const Searchbar = () => {
