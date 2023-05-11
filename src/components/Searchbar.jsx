@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MovieThumb from "./MovieThumb";
 import GenreButtons from './GenreButtons'
-
+import { handleMovieSearch } from "./Services/ApiServices";
 
 const Searchbar = () => {
 
@@ -10,13 +10,6 @@ const Searchbar = () => {
     const [movies, setMovies] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     
-    
-    const handleMovieSearch = async (searchKeyword) => {
-        const response = await fetch(`${searchAPI}&query=${searchKeyword}`);
-        const data = await response.json();
-    
-        setMovies(data.results);
-    }
     const clearAll = () => {
         setMovies([])
         setSearchTerm('')
@@ -51,7 +44,7 @@ const Searchbar = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}/>
         <img 
-            onClick={() => handleMovieSearch(searchTerm)} 
+            onClick={async () => setMovies(await handleMovieSearch(searchAPI, searchTerm))} 
             src="https://cdn-icons-png.flaticon.com/512/3917/3917754.png" 
             alt="Search" 
             className="search-icon"/>
