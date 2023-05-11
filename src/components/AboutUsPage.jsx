@@ -1,4 +1,5 @@
 import React from 'react';
+import '../AboutUsPage.css'
 
 function AboutUsPage() {
   const contacts = [
@@ -17,9 +18,9 @@ function AboutUsPage() {
         {contacts.map(contact => (
           <li key={contact.email}>
             <h2>{contact.name}</h2>
-            <p>Email: {contact.email}</p>
-            <p>Phone: {contact.phone}</p>
-            <p>Location: {contact.Location}</p>
+            <p className="contact-info">Email: {contact.email}</p>
+            <p className="contact-info">Phone: {contact.phone}</p>
+            <p className="contact-info">Location: {contact.Location}</p>
           </li>
         ))}
       </ul>
