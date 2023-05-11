@@ -9,17 +9,19 @@ import MovieCard from './components/MovieCard'
 import ShoppingCart from './components/ShoppingCart'
 import LogIn from './components/LogIn'
 import Profile from './components/Profile'
+import Payment from './components/Payment'
+
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Router>
-    {/* <Profile /> */}
-
         <App />
+      {/* <Profile /> */}
        {/* <HomePage /> */}
        {/*  <MovieCard /> */}
        {/*  <ShoppingCart /> */}
+        {/* <Payment /> */}
     </Router>
 </React.StrictMode>
 )

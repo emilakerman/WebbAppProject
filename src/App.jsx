@@ -12,6 +12,10 @@ import video from "./assets/sample_mp4.mp4";
 import MovieCard from './components/MovieCard';
 import LogIn from './components/LogIn';
 import Profile from './components/Profile';
+import ShoppingCart from './components/ShoppingCart';
+import Payment from './components/Payment';
+
+
 
 
 
@@ -31,7 +35,10 @@ function App() {
         <Route path="/" element={<HomePage/>}></Route>
         <Route path="/movies/:movieId" element={<MovieCard/>}></Route>
         <Route path="/AboutUsPage" element={<AboutUsPage/>}></Route>
+        <Route path="/ShoppingCart" element={<ShoppingCart/>}></Route>
         <Route path="/LogIn" element={<LogIn />}></Route>
+        <Route path="/ShoppingCart" element={<ShoppingCart/>}></Route>
+        <Route path="/Payment" element={<Payment/>}></Route>
       </Routes>
     </div>
     </>
