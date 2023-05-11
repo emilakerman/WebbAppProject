@@ -18,8 +18,8 @@ const Profile = () => {
       const user = getAuth().currentUser;
       if (user) {
         const userRef = doc(db, "users", user.uid);
-        const rentedMoviesRef = collection(userRef, "rentedMovies");
-        const snapshot = await getDocs(rentedMoviesRef);
+        const shoppingCartRef = collection(userRef, "rentedMovies");
+        const snapshot = await getDocs(shoppingCartRef);
         const cartItems = snapshot.docs.map((doc) => doc.data());
         setRented(cartItems);
       }
