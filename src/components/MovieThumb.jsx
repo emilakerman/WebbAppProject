@@ -25,8 +25,9 @@ const MovieThumb = ({movie}) => {
         <div       
         className='movie'
         // className={isPressed ? 'movieDynamic' : 'movie'}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}>
+        // onTouchStart={handleTouchStart}
+        // onTouchEnd={handleTouchEnd}
+        >
             <div>
                 <p></p>
             </div>

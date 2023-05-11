@@ -11,8 +11,10 @@ import VideoPlayer from './components/VideoPlayer';
 import video from "./assets/sample_mp4.mp4";
 import MovieCard from './components/MovieCard';
 import LogIn from './components/LogIn';
+import Profile from './components/Profile';
 import ShoppingCart from './components/ShoppingCart';
 import Payment from './components/Payment';
+
 
 
 
@@ -25,11 +27,9 @@ import Payment from './components/Payment';
 
 function App() {
   return (
-
+    
     <>
       <Navbar />
-
-
     <div>
       <Routes>
         <Route path="/" element={<HomePage/>}></Route>

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MovieThumb from "./MovieThumb";
-// import {motion} from "framer-motion"
-import GenreButtons from './GenreButtons'
-
+import { handleMovieSearch } from "./Services/ApiServices";
 
 const Searchbar = () => {
 
@@ -11,12 +9,29 @@ const Searchbar = () => {
     const [movies, setMovies] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     
-    
-    const handleMovieSearch = async (searchKeyword) => {
-        const response = await fetch(`${searchAPI}&query=${searchKeyword}`);
-        const data = await response.json();
-    
-        setMovies(data.results);
+    const clearAll = () => {
+        setMovies([])
+        setSearchTerm('')
+    }
+    const Content = () => {
+        return (
+            <div id='movieContainer'>
+                {movies.map((movie) => (
+                    <MovieThumb key={movie.id} movie={movie}/>
+                ))}
+            </div>
+        )
+    }
+    //Clear search
+    let content = null;
+    if (movies.length != 0) {
+        content = 
+        <div>
+            <div className="searchButtonContainer">
+                <button onClick={() => clearAll()} className="clearSearchButton">Clear search</button>
+            </div>
+            <Content />
+        </div>
     }
   return (
     <>
@@ -28,17 +43,12 @@ const Searchbar = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}/>
         <img 
-            onClick={() => handleMovieSearch(searchTerm)} 
+            onClick={async () => setMovies(await handleMovieSearch(searchAPI, searchTerm))} 
             src="https://cdn-icons-png.flaticon.com/512/3917/3917754.png" 
             alt="Search" 
             className="search-icon"/>
     </div>
-    {/* <GenreButtons /> */}
-        <div id='movieContainer'>
-            {movies.map((movie) => (
-                <MovieThumb key={movie.id} movie={movie}/>
-            ))}
-        </div>
+        {content}
     </>
   );
 };
