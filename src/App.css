@@ -5,6 +5,7 @@ body {
   }
   .homepageBG {
     padding-top: 1%;
+    padding-bottom: 1%;
     background: linear-gradient(
       45deg,
       #7b0505,
