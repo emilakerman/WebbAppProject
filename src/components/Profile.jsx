@@ -5,13 +5,7 @@ import { getFirestore, doc, collection, getDocs, deleteDoc } from "firebase/fire
 const Profile = () => {
   const db = getFirestore();
   const [rented, setRented] = useState([]); //previously rented movies from firestore
-  const [reviews, setReviews] = useState([
-    "Review1: 8/10",
-    "Review2: 4/10",
-    "Review3: 2/10",
-    "Review4: 1/10",
-    "Review5: 10/10"
-  ]); //reviews or maybe ratings of movies, also from firestore
+  const [reviews, setReviews] = useState([]); //reviews or maybe ratings of movies, also from firestore
 
   useEffect(() => {
     const fetchShoppingCart = async () => {

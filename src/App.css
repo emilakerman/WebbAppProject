@@ -658,8 +658,9 @@ margin-bottom: 10px;
     align-items: center;
     justify-content: center;
     border: solid white 1px;
-    width: 250px;
-    height: 570px;
+    width: 290px;
+    height: 470px;
+    margin-top: 150px;
   }
   #rentedLeftandReviewsRight {
     grid-template-columns: 1fr;
