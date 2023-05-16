@@ -7,7 +7,9 @@ import '.././shoppingcart.css'
 
 const ShoppingCart = () => {
   const [shoppingCart, setShoppingCart] = useState([]);
+  const [totalPrice, setTotalPrice] = useState([]);
   const db = getFirestore();
+  
 
   useEffect(() => {
     const fetchShoppingCart = async () => {
@@ -49,7 +51,13 @@ const ShoppingCart = () => {
     }
   };
 
-  const totalPrice = 0;
+  const addToCart = (movie, price) => {
+    const updatedCartItems = [...shoppingCart, { movie, price }];
+    setCartItems(updatedCartItems);
+    setTotalPrice(totalPrice + price); // Update the total price
+  };
+
+
 
   return (
     <div className="shopping-cart">
@@ -68,7 +76,7 @@ const ShoppingCart = () => {
           <ul>
             {shoppingCart.map((movie) => (
               <li key={movie.id}>
-                {movie.title} - $
+                {movie.title} - {movie.price} euro
                 <button onClick={() => removeMovie(movie.title)}>-</button>
               </li>
             ))}
@@ -78,7 +86,7 @@ const ShoppingCart = () => {
           <Link to="/">Rent more movies</Link>
           </button>
           
-          <p>Total price: {totalPrice} $</p>
+          <p>Total price: {totalPrice}euro </p>
           <Link to="/Payment">
           <button>Go to checkout</button>
           </Link>
