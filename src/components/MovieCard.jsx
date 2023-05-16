@@ -130,8 +130,8 @@ const MovieCard = () => {
 
           {/* If user is logged in: Can rent. if not: Log in to rent */}
           {user ? (
-            <div>
-              <button onClick={handleRentMovie}>Rent & Watch Online</button>
+            <div id="movieCardButtonContainer">
+              <button className='button' onClick={handleRentMovie}>Rent & Watch Online</button>
             </div>
           ) : (
             <button>

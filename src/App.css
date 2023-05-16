@@ -340,6 +340,7 @@ body {
 @media only screen and (max-width: 768px) {
   .outerContainer {
     padding: 50px;
+    padding-top: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -592,6 +593,20 @@ margin-bottom: 10px;
   flex-basis: calc(50% - 20px); /* Set width to 50% minus margin */
   margin-bottom: 10px;
 }
+#movieCardButtonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#movieCardButtonContainer .button {
+  width: 80%;
+}
+@media only screen and (max-width: 768px) {
+  #movieCardButtonContainer .button {
+    font-size: 14px;
+  }
+}
+
 
 @media (min-width: 768px) {
   .button {
