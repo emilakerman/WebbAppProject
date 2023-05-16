@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import '.././logIn.css'
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
@@ -69,7 +70,7 @@ const LogIn = () => {
   };
 
   return (
-    <div>
+    <div className="logInContainer">
       {user ? (
         <div>
           <p>{user.email}</p>
@@ -78,13 +79,12 @@ const LogIn = () => {
       ) : (
         <div>
           <label>
-            Email:
-            <input type="text" value={email} onChange={handleEmailChange} />
+         
+            <input type="text" value={email} onChange={handleEmailChange} placeholder="Email" />
           </label>
           <br />
           <label>
-            Password:
-            <input type="password" value={password} onChange={handlePasswordChange} />
+            <input type="password" value={password} onChange={handlePasswordChange} placeholder="Password" />
           </label>
           <br />
           <button onClick={handleLogIn}>Log In</button>
