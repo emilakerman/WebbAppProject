@@ -20,6 +20,12 @@ const ShoppingCart = () => {
         const snapshot = await getDocs(rentedMoviesRef);
         const cartItems = snapshot.docs.map((doc) => doc.data());
         setShoppingCart(cartItems);
+        let totalPrice = 0;
+        cartItems.forEach(movie => {
+          totalPrice += movie.price;
+        });
+    
+        setTotalPrice(totalPrice);
       }
     };
 
@@ -51,11 +57,7 @@ const ShoppingCart = () => {
     }
   };
 
-  const addToCart = (movie, price) => {
-    const updatedCartItems = [...shoppingCart, { movie, price }];
-    setCartItems(updatedCartItems);
-    setTotalPrice(totalPrice + price); // Update the total price
-  };
+
 
 
 
@@ -76,7 +78,7 @@ const ShoppingCart = () => {
           <ul>
             {shoppingCart.map((movie) => (
               <li key={movie.id}>
-                {movie.title} - {movie.price} euro
+                {movie.title} - ${movie.price}
                 <button onClick={() => removeMovie(movie.title)}>-</button>
               </li>
             ))}
@@ -86,7 +88,7 @@ const ShoppingCart = () => {
           <Link to="/">Rent more movies</Link>
           </button>
           
-          <p>Total price: {totalPrice}euro </p>
+          <p>Total price: ${totalPrice} </p>
           <Link to="/Payment">
           <button>Go to checkout</button>
           </Link>
