@@ -26,14 +26,27 @@ const Profile = () => {
         setRented(cartItems);
       }
     };
-    // handleSubmit();
     fetchShoppingCart();
   }, [db]);
 
   useEffect(() => {
     handleSubmit();
-  },[image, url]);
+  },[image]);
 
+  useEffect(() => {
+    const user = getAuth().currentUser;
+    if (user) {
+      const imageRef = ref(storage, `users/${user.uid}/profileImage`);
+      getDownloadURL(imageRef)
+        .then((url) => {
+          setUrl(url);
+        })
+        .catch((error) => {
+          console.log(error.message, "error getting the image url");
+        });
+    }
+  }, [storage]);
+  
     const randomKey = () => {
         return Math.random().toString(36).substring(2, 9);
     }
@@ -50,7 +63,7 @@ const Profile = () => {
         const metadata = {
           contentType: 'image/jpeg, image/png'
         };
-        const imageRef = ref(storage, "image");
+        const imageRef = ref(storage, `users/${user.uid}/profileImage`);
         uploadBytes(imageRef, image, metadata)
           .then(() => {
             getDownloadURL(imageRef)
