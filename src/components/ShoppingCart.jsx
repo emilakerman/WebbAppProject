@@ -51,6 +51,7 @@ const ShoppingCart = () => {
 
   const totalPrice = 0;
 
+
   return (
     <div className="shopping-cart">
       <h2>Shopping Cart</h2>

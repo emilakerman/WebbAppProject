@@ -5,8 +5,74 @@ import { getAuth } from "firebase/auth";
 import { getFirestore, collection, addDoc, doc } from "firebase/firestore";
 import { Link } from "react-router-dom"
 
-
 const MovieCard = () => {
+/* ratings */ 
+const Star = ({ marked, starId, onClick }) => {
+  return (
+    <span
+      star-id={starId}
+      style={{ color: "#ff9933" }}
+      role="button"
+      onClick={onClick}
+    >
+      {marked ? "\u2605" : "\u2606"}
+    </span>
+  );
+};
+
+  class Rating extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        rating: typeof this.props.initialRating === "number" ? this.props.initialRating : 0,
+        temp_rating: null
+      };
+    }
+    rate(starId) {
+      this.setState({
+        rating: starId,
+        temp_rating: starId
+      });
+      publishRating(starId, title); /* send rating to firestore here somewhere, send starID, title, ID*/ 
+      // console.log(starId, title);
+    }
+    star_over(starId) {
+      this.setState({
+        rating: this.state.rating,
+        temp_rating: starId
+      });
+    }
+    star_out() {
+      this.setState({
+        rating: this.state.rating,
+        temp_rating: null
+      });
+    }
+    render() {
+      const { totalStars } = this.props;
+      const { rating, temp_rating } = this.state;
+      return (
+        <div
+          style={{ fontSize: "40px", textAlign: "center", direction: "rtl" }}
+          onMouseOut={() => this.star_out()}
+        >
+          {Array.from({ length: totalStars }, (_, index) => {
+            const starId = index + 1;
+            return (
+              <Star
+                starId={starId}
+                key={`star_${starId}`}
+                marked={temp_rating ? temp_rating >= starId : rating >= starId}
+                onMouseOver={() => this.star_over(starId)}
+                onClick={() => this.rate(starId)}
+              />
+            );
+          })}
+        </div>
+      );
+    }
+  }
+
   const [user, setUser] = useState(null);//keeps track of the userobj
 
   useEffect(() => {
@@ -46,6 +112,33 @@ const MovieCard = () => {
         console.error("Error adding the movie ", error);
       });
   };
+  const publishRating = (starId) => {
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
+
+    if(!currentUser){
+      alert("Please log in to rate!")
+      return;
+    }
+
+    const ratingsData = {
+      rating: starId,
+      title: title
+    };
+
+    const db = getFirestore();
+    const userRef = doc(db, "users", currentUser.uid);
+
+    const ratingsRef = collection(userRef, "ratings");
+    addDoc(ratingsRef, ratingsData)
+      .then(() => {
+        alert("Rating uploaded!")
+      })
+      .catch((error) => {
+        console.error("Error rating ", error);
+      });
+  };
+  
 
   const location = useLocation()
   let { title, release_date, img, genre, overview, score } = location.state
@@ -127,7 +220,9 @@ const MovieCard = () => {
             <h3>{release_date}</h3>
             <h3>{score}</h3>
           </div>
-
+          <div className='ratingsContainer'>
+            <Rating totalStars={5} initialRating={0} title={title} />
+          </div>
           {/* If user is logged in: Can rent. if not: Log in to rent */}
           {user ? (
             <div id="movieCardButtonContainer">

@@ -79,6 +79,7 @@ const LogIn = () => {
   }
   return (
     <div className="logInContainer">
+      {profile}
       {user ? (
         <div>
           <p>{user.email}</p>
@@ -100,7 +101,6 @@ const LogIn = () => {
           {error && <p>{error}</p>}
         </div>
       )}
-        {profile}
     </div>
   );
 };

@@ -24,6 +24,11 @@ const Profile = () => {
         const snapshot = await getDocs(shoppingCartRef);
         const cartItems = snapshot.docs.map((doc) => doc.data());
         setRented(cartItems);
+        /* ratings below*/
+        const ratingsRef = collection(userRef, "ratings");
+        const snapshotRatings = await getDocs(ratingsRef);
+        const ratingsArray = snapshotRatings.docs.map((doc) => doc.data());
+        setReviews(ratingsArray);
       }
     };
     fetchShoppingCart();
@@ -105,9 +110,9 @@ const Profile = () => {
             ))}
             </div>
         <div id="movieReviews">
-            <h4>Movie reviews:</h4>
-            {reviews.map((review) => (
-                <div key={randomKey()}>{review}, </div>
+            <h4>Movie ratings:</h4>
+            {reviews.map((movie) => (
+                <div key={randomKey()}>{movie.rating}/5, {movie.title} </div>
             ))}
         </div>
         </div>
