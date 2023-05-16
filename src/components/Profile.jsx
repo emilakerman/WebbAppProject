@@ -1,11 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { getAuth } from "firebase/auth";
 import { getFirestore, doc, collection, getDocs, deleteDoc } from "firebase/firestore";
+import { storage } from ".././firebase/firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 
 const Profile = () => {
   const db = getFirestore();
   const [rented, setRented] = useState([]); //previously rented movies from firestore
   const [reviews, setReviews] = useState([]); //reviews or maybe ratings of movies, also from firestore
+
+  /* profile image */
+  const inputFile = useRef(null) ;
+  const [image, setImage] = useState(null);
+  const [url, setUrl] = useState(null);
 
   useEffect(() => {
     const fetchShoppingCart = async () => {
@@ -18,25 +26,61 @@ const Profile = () => {
         setRented(cartItems);
       }
     };
-
+    // handleSubmit();
     fetchShoppingCart();
   }, [db]);
+
+  useEffect(() => {
+    handleSubmit();
+  },[image, url]);
 
     const randomKey = () => {
         return Math.random().toString(36).substring(2, 9);
     }
-    const uploadAndSetProfilePic = () => {
-        /* the onclick handler to upload profile picture to firebase storage (if we decide to do this) */
-    }
-    const user = getAuth().currentUser;
+    const handleImageChange = (e) => {
+      if (e.target.files[0]) {
+        setImage(e.target.files[0]);
+      }
+    }; 
+    const onButtonClick = () => {
+      inputFile.current.click();
+    };
+    const handleSubmit = () => {
+      if (image) {
+        const metadata = {
+          contentType: 'image/jpeg, image/png'
+        };
+        const imageRef = ref(storage, "image");
+        uploadBytes(imageRef, image, metadata)
+          .then(() => {
+            getDownloadURL(imageRef)
+              .then((url) => {
+                setUrl(url);
+              })
+              .catch((error) => {
+                console.log(error.message, "error getting the image url");
+              });
+            // setImage(url);
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      }
+      else if (!image) {
+        console.log(image)
+      }
+    };
+    
+  const user = getAuth().currentUser;
   return (
     <div className="profileOuterContainer">
       <div className="profileContainer">
         <div id="usernameAndImage">
+        <input type='file' ref={inputFile} onChange={handleImageChange} style={{display: 'none'}}/>
           <img 
             id="profileImg"
-            src="https://i.imgur.com/GZ0gah4.png" /*profile image from firebase storage?*/
-            onClick={() => uploadAndSetProfilePic()}
+            src={url} /*profile image from firebase storage*/
+            onClick={() => onButtonClick()}
           ></img>
           <h3>{user.email}</h3> {/*Username or email from firebaseAUTH*/}
         </div>
