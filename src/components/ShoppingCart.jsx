@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { getAuth } from "firebase/auth";
 import { getFirestore, doc, collection, getDocs, deleteDoc } from "firebase/firestore";
 import { Link } from "react-router-dom"
+import '.././shoppingcart.css'
 
 const ShoppingCart = () => {
   const [shoppingCart, setShoppingCart] = useState([]);
@@ -51,8 +52,9 @@ const ShoppingCart = () => {
   const totalPrice = 0;
 
   return (
-    <div>
+    <div className="shopping-cart">
       <h2>Shopping Cart</h2>
+      <div className="cart-info">
       {shoppingCart.length === 0 ? (
         <p>Your cart is empty. <br/>
           <button>
@@ -67,7 +69,7 @@ const ShoppingCart = () => {
             {shoppingCart.map((movie) => (
               <li key={movie.id}>
                 {movie.title} - $
-                <button onClick={() => removeMovie(movie.title)}>Remove</button>
+                <button onClick={() => removeMovie(movie.title)}>-</button>
               </li>
             ))}
           </ul>
@@ -77,9 +79,12 @@ const ShoppingCart = () => {
           </button>
           
           <p>Total price: {totalPrice} $</p>
+          <Link to="/Payment">
           <button>Go to checkout</button>
+          </Link>
         </div>
       )}
+      </div>
     </div>
   );
 };
