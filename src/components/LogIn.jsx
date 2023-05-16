@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import Profile from "./Profile";
 import '.././logIn.css'
+
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
@@ -68,7 +70,13 @@ const LogIn = () => {
       setError(errorMessage);
     });
   };
-
+  //show only profile section if user is logged in
+  let profile = null;
+  if (user) {
+    profile = (
+      <Profile />
+    )
+  }
   return (
     <div className="logInContainer">
       {user ? (
@@ -92,6 +100,7 @@ const LogIn = () => {
           {error && <p>{error}</p>}
         </div>
       )}
+        {profile}
     </div>
   );
 };

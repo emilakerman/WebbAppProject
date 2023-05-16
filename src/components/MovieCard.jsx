@@ -37,7 +37,7 @@ const MovieCard = () => {
     const db = getFirestore();
     const userRef = doc(db, "users", currentUser.uid);
 
-    const rentedMoviesRef = collection(userRef, "rentedMovies");
+    const rentedMoviesRef = collection(userRef, "shoppingCart");
     addDoc(rentedMoviesRef, movieData)
       .then(() => {
         alert("Movie added to cart!")
@@ -130,8 +130,8 @@ const MovieCard = () => {
 
           {/* If user is logged in: Can rent. if not: Log in to rent */}
           {user ? (
-            <div>
-              <button onClick={handleRentMovie}>Rent & Watch Online</button>
+            <div id="movieCardButtonContainer">
+              <button className='button' onClick={handleRentMovie}>Rent & Watch Online</button>
             </div>
           ) : (
             <button>

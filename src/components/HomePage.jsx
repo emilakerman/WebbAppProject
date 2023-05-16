@@ -57,7 +57,7 @@ const HomePage = (props) => {
     };
 
     return (
-        <div>
+        <div className="homepageBG">
             <Searchbar />
             <div className="button-container">
                 <button onClick={() => changeList('trending')}className="button">Trending</button>

@@ -14,7 +14,7 @@ const ShoppingCart = () => {
       const user = getAuth().currentUser;
       if (user) {
         const userRef = doc(db, "users", user.uid);
-        const rentedMoviesRef = collection(userRef, "rentedMovies");
+        const rentedMoviesRef = collection(userRef, "shoppingCart");
         const snapshot = await getDocs(rentedMoviesRef);
         const cartItems = snapshot.docs.map((doc) => doc.data());
         setShoppingCart(cartItems);
@@ -29,7 +29,7 @@ const ShoppingCart = () => {
       const user = getAuth().currentUser;
       if (user) {
         const userRef = doc(db, "users", user.uid);
-        const rentedMoviesRef = collection(userRef, "rentedMovies");
+        const rentedMoviesRef = collection(userRef, "shoppingCart");
         const querySnapshot = await getDocs(rentedMoviesRef);
 
         querySnapshot.forEach((doc) => {
