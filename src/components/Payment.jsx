@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '.././payment.css'
+import { Link } from 'react-router-dom';
+import { getFirestore, doc, collection, getDocs, addDoc, deleteDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+
 
 
 const Payment = () => {
@@ -8,6 +12,50 @@ const Payment = () => {
   const [expirationYear, setExpirationYear] = useState('');
   const [cvc, setCvc] = useState('');
   const [cardholderName, setCardholderName] = useState('');
+
+  const [shoppingCart, setShoppingCart] = useState([]);
+  const db = getFirestore();
+
+  useEffect(() => {
+    const fetchShoppingCart = async () => {
+      const user = getAuth().currentUser;
+      if (user) {
+        const userRef = doc(db, "users", user.uid);
+        const rentedMoviesRef = collection(userRef, "shoppingCart");
+        const snapshot = await getDocs(rentedMoviesRef);
+        const cartItems = snapshot.docs.map((doc) => doc.data());
+        setShoppingCart(cartItems);
+      }
+    };
+
+    fetchShoppingCart();
+  }, [db]);
+
+  const addMoviesToBought = async () => {
+    const user = getAuth().currentUser;
+    if (user) {
+      const userRef = doc(db, "users", user.uid);
+      const rentedMoviesRef = collection(userRef, "RentedMovies");
+  
+      // Get the movies from the shopping cart
+      const moviesToAdd = shoppingCart.map((movie) => ({
+        title: movie.title
+
+      }));
+  
+      // Add the movies to the rented movies collection
+      try {
+        await Promise.all(moviesToAdd.map((movie) => addDoc(rentedMoviesRef, movie)));
+        console.log("Movies added to the rented movies collection.");
+        // Clear the shopping cart after success
+        setShoppingCart([]);
+      } catch (error) {
+        console.error("Error adding movies to the rented movies collection:", error);
+      }
+    }
+  };
+  
+
 
   const handleCardNumberChange = (event) => {
     const input = event.target.value
@@ -41,6 +89,8 @@ const Payment = () => {
     event.preventDefault();
     // handle payment submission logic here
   };
+
+  
 
   return (
     <div >
@@ -125,7 +175,10 @@ const Payment = () => {
     pattern="^[^0-9]+$"
   />
 
-  <button className='payButton' type="submit">Pay Now</button>
+<Link to={'/StreamMoviePage'}>
+  <button className='payButton' type="submit" onClick={addMoviesToBought}>Pay Now</button>
+</Link>
+
 </form>
 </div>
 </div>

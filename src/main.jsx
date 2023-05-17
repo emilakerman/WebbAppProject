@@ -10,6 +10,7 @@ import ShoppingCart from './components/ShoppingCart'
 import LogIn from './components/LogIn'
 import Profile from './components/Profile'
 import Payment from './components/Payment'
+import StreamMoviePage from './components/StreamMoviePage'
 
 
 
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Router>
         <App />
+{/*   <StreamMoviePage/> */}
       {/* <Profile /> */}
        {/* <HomePage /> */}
        {/*  <MovieCard /> */}
