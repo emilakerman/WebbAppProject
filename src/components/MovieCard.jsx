@@ -33,8 +33,7 @@ const Star = ({ marked, starId, onClick }) => {
         rating: starId,
         temp_rating: starId
       });
-      publishRating(starId, title); /* send rating to firestore here somewhere, send starID, title, ID*/ 
-      // console.log(starId, title);
+      publishRating(starId, title); /* send rating to firestore here, send starID, title*/ 
     }
     star_over(starId) {
       this.setState({
@@ -138,7 +137,6 @@ const Star = ({ marked, starId, onClick }) => {
         console.error("Error rating ", error);
       });
   };
-  
 
   const location = useLocation()
   let { title, release_date, img, genre, overview, score } = location.state
