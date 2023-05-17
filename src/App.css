@@ -627,7 +627,6 @@ margin-bottom: 10px;
 
 /* profile */
 .profileOuterContainer {
-  height: 50vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -639,8 +638,16 @@ margin-bottom: 10px;
   align-items: center;
   justify-content: center;
   border: solid white 1px;
-  width: 550px;
-  height: 370px;
+  width: auto;
+  height: auto;
+}
+.listsContainer {
+  margin-top: 9%;
+  display: flex;
+}
+.listTitles {
+  text-align: center;
+  color: white;
 }
 .profileContainer:hover {
   box-shadow: 0 0 10px rgba(85, 26, 26, 0.3);
@@ -663,22 +670,6 @@ margin-bottom: 10px;
 #profileImg:hover {
   box-shadow: 0 0 10px rgba(195, 50, 50, 0.3);
 }
-#previouslyRented {
-  display: grid;
-  align-items: center;
-  justify-content: center;
-}
-#movieReviews {
-
-}
-#rentedLeftandReviewsRight {
-  text-align: center;
-  color: white;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  width: 40vh;
-  padding-bottom: 15px;
-}
 /* profile mobile */ 
 @media (max-width: 768px) {
   .profileContainer {
@@ -698,4 +689,22 @@ margin-bottom: 10px;
 }
 .ratingsContainer {
   margin-top: -20px;
+}
+.post{
+  background-color: #8d8181;
+  margin: 2rem;
+  padding: 0.8rem;
+}
+.pagination{
+  margin: 1rem auto;
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  width: 50%;
+}
+.active{
+  border: 1px solid black;
+  border-radius: 100%;
+  padding: 0 3px;
+  outline: none;
 }

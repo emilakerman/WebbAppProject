@@ -20,7 +20,7 @@ const Profile = () => {
       const user = getAuth().currentUser;
       if (user) {
         const userRef = doc(db, "users", user.uid);
-        const shoppingCartRef = collection(userRef, "rentedMovies");
+        const shoppingCartRef = collection(userRef, "shoppingCart");
         const snapshot = await getDocs(shoppingCartRef);
         const cartItems = snapshot.docs.map((doc) => doc.data());
         setRented(cartItems);
@@ -88,6 +88,19 @@ const Profile = () => {
         console.log(image)
       }
     };
+
+  const RentalsAndReviews = (props) => {
+    return (
+      <div>
+        <h3 className="listTitles">{props.title}</h3>
+        {props.list.map((movie) => (
+          <div key={randomKey()} className="post">
+            <h3>{movie.title}{props.ratingDivider}{movie.rating}{props.ratingOutOfFive}</h3>
+          </div>
+        ))}
+      </div>
+    );
+  };
     
   const user = getAuth().currentUser;
   return (
@@ -102,20 +115,24 @@ const Profile = () => {
           ></img>
           <h3>{user.email}</h3> {/*Username or email from firebaseAUTH*/}
         </div>
-        <div id="rentedLeftandReviewsRight">
+        <div className="listsContainer">
+          <RentalsAndReviews title="Previously rented" list={rented}/>
+          <RentalsAndReviews title="Personal Ratings" list={reviews} ratingDivider=" - " ratingOutOfFive="/5"/>
+        </div>
+        {/* <div id="rentedLeftandReviewsRight">
         <div id="previouslyRented">
-            <h4>Previously rented:</h4>
+            <h4 id="h4Profile">Previously rented:</h4>
             {rented.map((movie) => (
                 <div key={randomKey()}>{movie.title} </div>
             ))}
             </div>
         <div id="movieReviews">
-            <h4>Movie ratings:</h4>
+            <h4 id="h4Profile">Movie ratings:</h4>
             {reviews.map((movie) => (
                 <div key={randomKey()}>{movie.rating}/5, {movie.title} </div>
             ))}
         </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
