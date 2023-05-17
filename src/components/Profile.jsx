@@ -3,6 +3,7 @@ import { getAuth } from "firebase/auth";
 import { getFirestore, doc, collection, getDocs, deleteDoc } from "firebase/firestore";
 import { storage } from ".././firebase/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import RentalsAndReviews from "./RentalsAndReviews";
 
 
 const Profile = () => {
@@ -52,9 +53,6 @@ const Profile = () => {
     }
   }, [storage]);
   
-    const randomKey = () => {
-        return Math.random().toString(36).substring(2, 9);
-    }
     const handleImageChange = (e) => {
       if (e.target.files[0]) {
         setImage(e.target.files[0]);
@@ -88,19 +86,6 @@ const Profile = () => {
         console.log(image)
       }
     };
-
-  const RentalsAndReviews = (props) => {
-    return (
-      <div>
-        <h3 className="listTitles">{props.title}</h3>
-        {props.list.map((movie) => (
-          <div key={randomKey()} className="post">
-            <h3>{movie.title}{props.ratingDivider}{movie.rating}{props.ratingOutOfFive}</h3>
-          </div>
-        ))}
-      </div>
-    );
-  };
     
   const user = getAuth().currentUser;
   return (
@@ -119,20 +104,6 @@ const Profile = () => {
           <RentalsAndReviews title="Previously rented" list={rented}/>
           <RentalsAndReviews title="Personal Ratings" list={reviews} ratingDivider=" - " ratingOutOfFive="/5"/>
         </div>
-        {/* <div id="rentedLeftandReviewsRight">
-        <div id="previouslyRented">
-            <h4 id="h4Profile">Previously rented:</h4>
-            {rented.map((movie) => (
-                <div key={randomKey()}>{movie.title} </div>
-            ))}
-            </div>
-        <div id="movieReviews">
-            <h4 id="h4Profile">Movie ratings:</h4>
-            {reviews.map((movie) => (
-                <div key={randomKey()}>{movie.rating}/5, {movie.title} </div>
-            ))}
-        </div>
-        </div> */}
       </div>
     </div>
   );
