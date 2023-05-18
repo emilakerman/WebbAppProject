@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '.././payment.css'
 import { Link } from 'react-router-dom';
-import { getFirestore, doc, collection, getDocs, addDoc, deleteDoc } from "firebase/firestore";
+import { getFirestore, doc, collection, getDocs, addDoc, deleteDoc, Timestamp } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 
@@ -32,14 +32,22 @@ const Payment = () => {
   }, [db]);
 
   const addMoviesToBought = async () => {
+    var date = new Date();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+
+    var currentTime = hours + ":" + minutes + ":" + seconds;
+
     const user = getAuth().currentUser;
     if (user) {
       const userRef = doc(db, "users", user.uid);
       const rentedMoviesRef = collection(userRef, "RentedMovies");
   
-      // Get the movies from the shopping cart
+      // Get the movies from the shopping cart and set a timeStamp to when each movie was rented
       const moviesToAdd = shoppingCart.map((movie) => ({
-        title: movie.title
+        title: movie.title,
+        time: currentTime
 
       }));
   

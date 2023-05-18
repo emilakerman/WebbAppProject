@@ -1,11 +1,31 @@
 
 import VideoPlayer from './VideoPlayer';
 import video from "../assets/sample_mp4.mp4";
-import { useRef } from 'react';
-
+import { useEffect, useRef, useState } from 'react';
+import { getAuth } from "firebase/auth";
+import { getFirestore, doc, collection, getDocs } from 'firebase/firestore';
 
     const StreamMoviePage = () => {
     
+    const [rentedMovies, setRentedMovies] = useState([]);
+    const db = getFirestore();
+
+    useEffect(() => {
+      const getRentedMovies = async () => {
+        const user = getAuth().currentUser;
+        if (user) {
+          const userRef = doc(db, "users", user.uid);
+          const rentedMoviesRef = collection(userRef, "RentedMovies");
+          const snapshot = await getDocs(rentedMoviesRef);
+          const movies = snapshot.docs.map((doc) => doc.data());
+          console.log(movies);
+          setRentedMovies(movies);
+        }
+      };
+
+      getRentedMovies();
+    }, [db]);
+
     
     const videoElement = useRef(null);
     const {
@@ -23,6 +43,19 @@ import { useRef } from 'react';
 
    return(
      <div className='container'>
+      
+          <div className='RentedMovies'>
+            <h3>Rented Movies:</h3>
+            <ul>
+              {rentedMovies.map((movie) => (
+                <li key = {movie.id}>
+                  {movie.title}
+                  <h4>Rented at : {movie.time}</h4>
+                </li>
+              ))}
+            </ul>
+          </div>
+
        <div className='video-wrapper'>
          <video 
            src={video}
