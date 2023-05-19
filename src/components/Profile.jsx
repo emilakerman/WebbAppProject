@@ -21,7 +21,7 @@ const Profile = () => {
       const user = getAuth().currentUser;
       if (user) {
         const userRef = doc(db, "users", user.uid);
-        const shoppingCartRef = collection(userRef, "shoppingCart");
+        const shoppingCartRef = collection(userRef, "rentedMovies");
         const snapshot = await getDocs(shoppingCartRef);
         const cartItems = snapshot.docs.map((doc) => doc.data());
         setRented(cartItems);
@@ -35,6 +35,7 @@ const Profile = () => {
     };
     fetchShoppingCart();
   }, [db]);
+  //removes duplicate reviews by only keeping the one with the latest timestamp
   function removeDuplicateWithMinTimestamp(array) {
     const titleCount = {};
     const timestampMap = {};
@@ -111,7 +112,18 @@ const Profile = () => {
         // console.log(image)
       }
     };
-    
+  let previousRentalsComponent = null;
+  if (rented.length !== 0) {
+    previousRentalsComponent = (
+      <RentalsAndReviews title="Previously rented" list={rented}/>
+    )
+  }
+  let ratingsComponent = null;
+  if (reviews.length !== 0) {
+    ratingsComponent = (
+      <RentalsAndReviews title="Personal Ratings" list={reviews} ratingDivider=" - " ratingOutOfFive="/5"/>
+    )
+  }
   const user = getAuth().currentUser;
   return (
     <div className="profileOuterContainer">
@@ -126,8 +138,8 @@ const Profile = () => {
           <h3>{user.email}</h3> {/*Username or email from firebaseAUTH*/}
         </div>
         <div className="listsContainer">
-          <RentalsAndReviews title="Previously rented" list={rented}/>
-          <RentalsAndReviews title="Personal Ratings" list={reviews} ratingDivider=" - " ratingOutOfFive="/5"/>
+          {previousRentalsComponent}
+          {ratingsComponent}
         </div>
       </div>
     </div>
