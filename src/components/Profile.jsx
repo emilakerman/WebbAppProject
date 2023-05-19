@@ -29,12 +29,37 @@ const Profile = () => {
         const ratingsRef = collection(userRef, "ratings");
         const snapshotRatings = await getDocs(ratingsRef);
         const ratingsArray = snapshotRatings.docs.map((doc) => doc.data());
-        setReviews(ratingsArray);
+
+        setReviews(removeDuplicateWithMinTimestamp(ratingsArray));
       }
     };
     fetchShoppingCart();
   }, [db]);
-
+  function removeDuplicateWithMinTimestamp(array) {
+    const titleCount = {};
+    const timestampMap = {};
+  
+    for (let i = 0; i < array.length; i++) {
+      const item = array[i];
+      const title = item.title;
+      const timestamp = item.timestamp;
+  
+      if (titleCount[title]) {
+        if (timestamp > timestampMap[title]) {
+          timestampMap[title] = timestamp;
+          array[titleCount[title] - 1] = null;
+          titleCount[title] = i + 1;
+        } else {
+          array[i] = null;
+        }
+      } else {
+        // First occurrence of the title
+        titleCount[title] = i + 1;
+        timestampMap[title] = timestamp;
+      }
+    }
+    return array.filter(Boolean);
+  }
   useEffect(() => {
     handleSubmit();
   },[image]);
@@ -83,7 +108,7 @@ const Profile = () => {
           });
       }
       else if (!image) {
-        console.log(image)
+        // console.log(image)
       }
     };
     
