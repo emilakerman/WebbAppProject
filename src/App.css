@@ -641,6 +641,15 @@ margin-bottom: 10px;
   width: auto;
   height: auto;
 }
+/* switch to this one when the lists are empty */ 
+.hiddenProfileContainer {
+  color: white;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+}
 .listsContainer {
   margin-top: 15%;
   display: flex;

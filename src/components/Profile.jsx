@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { getAuth } from "firebase/auth";
 import { getFirestore, doc, collection, getDocs, deleteDoc } from "firebase/firestore";
 import { storage } from ".././firebase/firebase";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL, list } from "firebase/storage";
 import RentalsAndReviews from "./RentalsAndReviews";
 
 
@@ -112,22 +112,37 @@ const Profile = () => {
         // console.log(image)
       }
     };
-  let previousRentalsComponent = null;
-  if (rented.length !== 0) {
-    previousRentalsComponent = (
-      <RentalsAndReviews title="Previously rented" list={rented}/>
-    )
-  }
-  let ratingsComponent = null;
-  if (reviews.length !== 0) {
-    ratingsComponent = (
-      <RentalsAndReviews title="Personal Ratings" list={reviews} ratingDivider=" - " ratingOutOfFive="/5"/>
-    )
-  }
+    /* showing lists or not, as well as hiding some css*/
+    const [showingRatings, setShowingRatings] = useState(false);
+    const [showingPrevious, setShowingPrevious] = useState(false);
+    const [listsShowing, setListsShowing] = useState(true);
+    const [previousRentalsComponent, setPreviousRentalsComponent] = useState(null);
+    const [ratingsComponent, setRatingsComponent] = useState(null);
+  
+    useEffect(() => {
+      if (rented.length !== 0) {
+        setShowingPrevious(true);
+        setPreviousRentalsComponent(<RentalsAndReviews title="Previously rented" list={rented} />);
+      }
+  
+      if (reviews.length !== 0) {
+        setShowingRatings(true);
+        setRatingsComponent(<RentalsAndReviews title="Personal Ratings" list={reviews} ratingDivider=" - " ratingOutOfFive="/5" />);
+      }
+  
+      if (!showingPrevious && !showingRatings) {
+        setListsShowing(false);
+      } else {setListsShowing(true)}
+    }, [rented.length, reviews.length, showingPrevious, showingRatings]);
+  
+    const profileContainer = listsShowing ? 'profileContainer' : 'hiddenProfileContainer';
+
+  
+
   const user = getAuth().currentUser;
   return (
     <div className="profileOuterContainer">
-      <div className="profileContainer">
+      <div className={profileContainer}>
         <div id="usernameAndImage">
         <input type='file' ref={inputFile} onChange={handleImageChange} style={{display: 'none'}}/>
           <img 
