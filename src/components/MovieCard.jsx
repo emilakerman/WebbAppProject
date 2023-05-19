@@ -5,6 +5,7 @@ import { getAuth } from "firebase/auth";
 import { getFirestore, collection, addDoc, doc } from "firebase/firestore";
 import { Link } from "react-router-dom"
 
+
 const MovieCard = () => {
 /* ratings */ 
 const Star = ({ marked, starId, onClick }) => {
@@ -119,10 +120,15 @@ const Star = ({ marked, starId, onClick }) => {
       alert("Please log in to rate!")
       return;
     }
+    //save timestamp
+    const getTimestampInSeconds = () => {
+      return Math.floor(Date.now() / 1000)
+    }
 
     const ratingsData = {
       rating: starId,
-      title: title
+      title: title,
+      timestamp: getTimestampInSeconds()
     };
 
     const db = getFirestore();
