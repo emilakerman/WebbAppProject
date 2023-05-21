@@ -21,8 +21,8 @@ const Payment = () => {
       const user = getAuth().currentUser;
       if (user) {
         const userRef = doc(db, "users", user.uid);
-        const rentedMoviesRef = collection(userRef, "shoppingCart");
-        const snapshot = await getDocs(rentedMoviesRef);
+        const shoppingCartRef = collection(userRef, "shoppingCart");
+        const snapshot = await getDocs(shoppingCartRef);
         const cartItems = snapshot.docs.map((doc) => doc.data());
         setShoppingCart(cartItems);
       }
@@ -43,6 +43,7 @@ const Payment = () => {
     if (user) {
       const userRef = doc(db, "users", user.uid);
       const rentedMoviesRef = collection(userRef, "RentedMovies");
+      const shoppingCartRef = collection(userRef, "shoppingCart")
   
       // Get the movies from the shopping cart and set a timeStamp to when each movie was rented
       const moviesToAdd = shoppingCart.map((movie) => ({
@@ -57,6 +58,14 @@ const Payment = () => {
         console.log("Movies added to the rented movies collection.");
         // Clear the shopping cart after success
         setShoppingCart([]);
+        const snapshot = await getDocs(shoppingCartRef);
+        snapshot.forEach(async (doc) => {
+          await deleteDoc(doc.ref);
+        });
+  
+
+        console.log("Firebase ShoppingCart cleared")
+        
       } catch (error) {
         console.error("Error adding movies to the rented movies collection:", error);
       }

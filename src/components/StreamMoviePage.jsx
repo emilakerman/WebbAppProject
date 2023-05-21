@@ -18,7 +18,6 @@ import { getFirestore, doc, collection, getDocs } from 'firebase/firestore';
           const rentedMoviesRef = collection(userRef, "RentedMovies");
           const snapshot = await getDocs(rentedMoviesRef);
           const movies = snapshot.docs.map((doc) => doc.data());
-          console.log(movies);
           setRentedMovies(movies);
         }
       };
