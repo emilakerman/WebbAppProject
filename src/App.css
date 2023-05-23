@@ -338,9 +338,17 @@ body {
     
 /* mobile below */
 @media only screen and (max-width: 768px) {
+  .search-icon {
+    right: -135px;
+  }
+  .input-container {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
   .outerContainer {
     padding: 50px;
     padding-top: 10px;
+    padding-bottom: 170px;
     display: flex;
     justify-content: center;
     align-items: center;
