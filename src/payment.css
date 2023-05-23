@@ -71,7 +71,7 @@ body {
   }
   
     .payButton {
-        background-color: #4CAF50;
+        /* background-color: #4CAF50; */
         color: white;
         font-size: 16px;
         padding: 12px 24px;
@@ -95,4 +95,45 @@ body {
     font-size: 16px;
     cursor: pointer;
   } */
- 
+ .payAndTotalContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ }
+.totalAmount {
+
+}
+.payAndTotalContainer h2 {
+  background:linear-gradient(to right, rgba(49, 24, 28, 0.8), rgba(36, 11, 54, 0.8));  
+  color: white;
+  font-size: 19px;
+  text-align: end;
+}
+@media only screen and (max-width: 768px) {
+  .payment-form {
+    border-radius: 10px;
+    background: linear-gradient(to right, rgba(225, 223, 223, 0.8), rgba(179, 102, 234, 0.8));
+    padding: 20px;
+    width: 320px;
+    height: 450px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+  .payAndTotalContainer h2 {
+    background:linear-gradient(to right, rgba(49, 24, 28, 0.8), rgba(36, 11, 54, 0.8));  
+    color: white;
+    font-size: 19px;
+    text-align: end;
+    /* margin-bottom: 20px; */
+
+  }
+  .payAndTotalContainer {
+
+  }
+  .payButton {
+    margin-bottom: 20px;
+  }
+}

@@ -92,7 +92,7 @@ const ShoppingCart = () => {
           </button>
           
           <p>Total price: ${totalPrice} </p>
-          <Link to="/Payment">
+          <Link to="/Payment" state={{total : totalPrice}}>
           <button>Go to checkout</button>
           </Link>
         </div>
