@@ -61,6 +61,7 @@ const ShoppingCart = () => {
 
 
 
+
   return (
     <div className="shopping-cart">
       <h2>Shopping Cart</h2>

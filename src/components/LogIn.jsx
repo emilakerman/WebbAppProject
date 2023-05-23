@@ -79,6 +79,7 @@ const LogIn = () => {
   }
   return (
     <div className="logInContainer">
+      {profile}
       {user ? (
         <div>
           <p>{user.email}</p>
@@ -95,12 +96,13 @@ const LogIn = () => {
             <input type="password" value={password} onChange={handlePasswordChange} placeholder="Password" />
           </label>
           <br />
+          <div className="buttonContainer">
           <button onClick={handleLogIn}>Log In</button>
           <button onClick={handleSignUp}>Sign Up</button>
+          </div>
           {error && <p>{error}</p>}
         </div>
       )}
-        {profile}
     </div>
   );
 };
