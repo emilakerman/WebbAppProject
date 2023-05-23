@@ -99,11 +99,17 @@ const MovieCard = () => {
       return;
     }
 
+    const getRandomPrice = () => {
+      return Math.floor(Math.random() * 100) + 1;
+    };
+
     const movieData = {
       title: title,
       genre: genre,
       release_date: release_date,
       score: score,
+
+
     };
 
     const db = getFirestore();

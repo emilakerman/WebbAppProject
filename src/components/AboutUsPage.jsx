@@ -4,8 +4,10 @@ import '../AboutUsPage.css'
 function AboutUsPage() {
   const contacts = [
     {
+
       name: 'MovieLand',
       email: 'movieland@gmail.com',
+
       phone: '555-578-55325',
       Location: 'Kolarängsvägen 67 / 17843 Stockholm'
     }
@@ -17,6 +19,7 @@ function AboutUsPage() {
       <h1 className='aboutUsh1'>Welcome to MovieLand</h1>
       <h2 className='aboutUsh2'>If you need any help please feel free to contact us anytime!</h2>
       <ul className='aboutUsUl'>
+
         {contacts.map(contact => (
           <li className='aboutUsLI' key={contact.email}>
             <h2 className='aboutUsh2'>{contact.name}</h2>
