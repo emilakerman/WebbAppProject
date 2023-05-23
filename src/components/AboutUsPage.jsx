@@ -4,8 +4,8 @@ import '../AboutUsPage.css'
 function AboutUsPage() {
   const contacts = [
     {
-      name: 'Big Buster Renthouse',
-      email: 'bb-renthouse@gmail.com',
+      name: 'Movie Z',
+      email: 'movie-z@gmail.com',
       phone: '555-578-55325',
       Location: 'Kolarängsvägen 67 / 17843 Stockholm'
     }
@@ -13,7 +13,7 @@ function AboutUsPage() {
 
   return (
     <div>
-      <h1>Hello. Welcome to Big Buster Renthouse</h1>
+      <h1>Welcome to Movie Z</h1>
       <h2>If you need any help please feel free to contact us anytime!</h2>
       <ul>
         {contacts.map(contact => (
