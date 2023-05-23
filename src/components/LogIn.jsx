@@ -96,8 +96,10 @@ const LogIn = () => {
             <input type="password" value={password} onChange={handlePasswordChange} placeholder="Password" />
           </label>
           <br />
+          <div className="buttonContainer">
           <button onClick={handleLogIn}>Log In</button>
           <button onClick={handleSignUp}>Sign Up</button>
+          </div>
           {error && <p>{error}</p>}
         </div>
       )}

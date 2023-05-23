@@ -15,7 +15,12 @@
   border-radius: 4px;
   font-size: 16px;
 }
-
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10%;
+}
 .logInContainer button {
   padding: 10px 20px;
   margin-bottom: 10px;
