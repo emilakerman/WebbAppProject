@@ -135,6 +135,7 @@ const Profile = () => {
       } else {setListsShowing(true)}
     }, [rented.length, reviews.length, showingPrevious, showingRatings]);
   
+    //this one hides the container for the profile when both lists are empty
     const profileContainer = listsShowing ? 'profileContainer' : 'hiddenProfileContainer';
 
   

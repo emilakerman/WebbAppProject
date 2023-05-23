@@ -2,3 +2,56 @@
   font-size: 22px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+.aboutOuterContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aboutUsContainer {
+  max-width: 450px;
+  text-align: center;
+  margin: 20px;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.aboutUsh1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.aboutUsh2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.aboutUsUl {
+  list-style-type: none;
+  padding: 0;
+}
+
+.aboutUsLI {
+  margin-bottom: 20px;
+}
+
+.aboutUsLI:nth-child(even) {
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.aboutUsLI:hover {
+  background-color: #eaeaea;
+}
+
+.aboutUsLI h2 {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.aboutUsLI p {
+  margin: 5px 0;
+}
