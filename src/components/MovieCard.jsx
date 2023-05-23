@@ -108,8 +108,7 @@ const MovieCard = () => {
       genre: genre,
       release_date: release_date,
       score: score,
-
-
+      price: getRandomPrice()
     };
 
     const db = getFirestore();

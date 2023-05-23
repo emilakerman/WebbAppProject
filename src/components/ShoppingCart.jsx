@@ -60,7 +60,9 @@ const ShoppingCart = () => {
 
 
 
-
+  const randomKey = () => {
+    return Math.random().toString(36).substring(2, 9);
+}
 
   return (
     <div className="shopping-cart">
@@ -76,9 +78,9 @@ const ShoppingCart = () => {
       ) : (
         <div>
           <h3>Your added movies</h3>
-          <ul>
+          <ul> 
             {shoppingCart.map((movie) => (
-              <li key={movie.id}>
+              <li key={randomKey()}> 
                 {movie.title} - ${movie.price}
                 <button onClick={() => removeMovie(movie.title)}>-</button>
               </li>
