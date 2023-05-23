@@ -5,7 +5,6 @@ import HomePage from "./components/HomePage"
 import AboutUsPage from "./components/AboutUsPage"
 import axios from 'redaxios'; //external api fetch library (replacing fetch, this is more light weight apparently)
 import './App.css';
-import handleSubmit from './handles/handlesubmit';
 import MovieCard from './components/MovieCard';
 import LogIn from './components/LogIn';
 import Profile from './components/Profile';
