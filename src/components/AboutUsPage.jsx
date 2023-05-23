@@ -26,6 +26,10 @@ function AboutUsPage() {
           </li>    
         ))}
       </ul>
+      <div className='containerInputSendEmail'>
+        <input type="text"></input>
+        <button>Send email</button>
+      </div>
     </div>
     </div>
   );

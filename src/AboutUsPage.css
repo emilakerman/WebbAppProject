@@ -83,3 +83,13 @@
     animation: zoomIn 1s ease-out forwards;
   }
 }
+.containerInputSendEmail {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  gap: 10%;
+}
+.containerInputSendEmail input {
+  width: 20em;
+  height: 4em;
+}
