@@ -14,7 +14,7 @@ function AboutUsPage() {
   return (
     <div className='aboutOuterContainer'>
     <div className='aboutUsContainer'>
-      <h1 className='aboutUsh1'>Hello. Welcome to MovieLand</h1>
+      <h1 className='aboutUsh1'>Welcome to MovieLand</h1>
       <h2 className='aboutUsh2'>If you need any help please feel free to contact us anytime!</h2>
       <ul className='aboutUsUl'>
         {contacts.map(contact => (
