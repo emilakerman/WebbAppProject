@@ -246,7 +246,7 @@ body {
 #rentWatchButton {
   border: none;
   padding: 10px 20px;
-  background-color: #8B008B;
+  background-color: #951695;
   color: #FFFFFF;
   font-size: 16px;
   font-weight: bold;
@@ -453,6 +453,10 @@ body {
   }
   
   @media (max-width: 768px) {
+    .rentWatchButton {
+      text-align: center;
+    }
+    
     .movie-page {
       flex-direction: column;
     }
