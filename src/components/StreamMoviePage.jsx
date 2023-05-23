@@ -3,7 +3,7 @@ import VideoPlayer from './VideoPlayer';
 import video from "../assets/sample_mp4.mp4";
 import React, { useEffect, useRef, useState } from 'react';
 import { getAuth } from 'firebase/auth';
-import { getFirestore, doc, collection, getDocs, deleteDoc } from 'firebase/firestore';
+import { getFirestore, doc, collection, getDocs, deleteDoc, addDoc } from 'firebase/firestore';
 
 const StreamMoviePage = () => {
   const [rentedMovies, setRentedMovies] = useState([]);
@@ -25,7 +25,7 @@ const StreamMoviePage = () => {
   }, [db]);
 
   useEffect(() => {
-    console.log("Minute");
+    console.log("Updated after 1 minute");
     const intervalId = setInterval(() => {
       rentedMovies.forEach((movie) => {
         console.log("foreach")
@@ -39,11 +39,8 @@ const StreamMoviePage = () => {
   }, [rentedMovies]);
 
   const checkMovieExpiry = async (movie) => {
-    console.log("Expiry")
     const currentTimestamp = Date.now();
     const expiryTimestamp = movie.expiryDate.toMillis();
-    console.log(currentTimestamp);
-    console.log(expiryTimestamp);
   
     if (currentTimestamp > expiryTimestamp) {
       try {
@@ -56,6 +53,8 @@ const StreamMoviePage = () => {
           querySnapshot.forEach(async (doc) => {
             const movieData = doc.data();
             if (movieData.title === movie.title) {
+              const previouslyRentedRef = collection(userRef, 'PreviouslyRented');
+              await addDoc(previouslyRentedRef, movieData); // Add the movie to PreviouslyRented collection
               await deleteDoc(doc.ref);
               console.log(`Movie "${movie.title}" has expired and has been deleted from Firebase.`);
               setRentedMovies((prevMovies) =>
@@ -69,6 +68,7 @@ const StreamMoviePage = () => {
       }
     }
   };
+  
   
   
   
