@@ -4,7 +4,6 @@ import video from "../assets/sample_mp4.mp4";
 import React, { useEffect, useRef, useState } from 'react';
 import { getAuth } from 'firebase/auth';
 import { getFirestore, doc, collection, getDocs, deleteDoc, addDoc } from 'firebase/firestore';
-import '.././VideoPlayer.css'
 import '.././StreamMovie.css'
 
 const StreamMoviePage = () => {
