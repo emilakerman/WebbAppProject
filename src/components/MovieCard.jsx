@@ -11,6 +11,7 @@ const MovieCard = () => {
 
   const [user, setUser] = useState(null);//keeps track of the userobj
   const [showPopup, setShowPopup] = useState(false);
+  const [popuptext, setPopUptext] = useState('');
   
   
 
@@ -102,7 +103,8 @@ const MovieCard = () => {
     const currentUser = auth.currentUser;
 
     if (!currentUser) {
-      alert("Please log in to rent!");
+      setPopUptext('Please login to rent!');
+      setShowPopup(true); 
       return;
     }
 
@@ -124,6 +126,7 @@ const MovieCard = () => {
     const rentedMoviesRef = collection(userRef, "shoppingCart");
     addDoc(rentedMoviesRef, movieData)
       .then(() => {
+        setPopUptext('Movie added to cart!');
         setShowPopup(true);
 
       })
@@ -136,7 +139,8 @@ const MovieCard = () => {
     const currentUser = auth.currentUser;
 
     if (!currentUser) {
-      alert("Please log in to rate!");
+      setPopUptext('Please login to rate!');
+      setShowPopup(true); 
       return;
     }
     //save timestamp
@@ -156,7 +160,8 @@ const MovieCard = () => {
     const ratingsRef = collection(userRef, "ratings");
     addDoc(ratingsRef, ratingsData)
       .then(() => {
-        alert("Rating uploaded!");
+        setPopUptext('Rating published!');
+        setShowPopup(true); 
       })
       .catch((error) => {
         console.error("Error rating ", error);
@@ -302,7 +307,7 @@ const MovieCard = () => {
       {showPopup && (
         <div className="popup-added-cart">
           <div className="popup-added-cart-content">
-            <h3>Movie added to cart!</h3>
+            <h3>{popuptext}</h3>
             <button className="popup-close-button" onClick={() => setShowPopup(false)}>
               Close
             </button>

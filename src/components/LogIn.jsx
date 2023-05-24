@@ -10,6 +10,10 @@ const LogIn = () => {
   const [error, setError] = useState("");
   const [user, setUser] = useState(null); // state to keep track of user object
 
+  //popup varibles below
+  const [showPopup, setShowPopup] = useState(false);
+  const [popuptext, setPopUptext] = useState('');
+
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -32,7 +36,8 @@ const LogIn = () => {
       .then((userCredential) => {
         // signed up
         const user = userCredential.user;
-        alert(user.email + " Signed Up");
+        setPopUptext(user.email + ' - Signed up!');
+        setShowPopup(true); 
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -48,7 +53,8 @@ const LogIn = () => {
       .then((userCredential) => {
         // logged in
         const user = userCredential.user;
-        alert(user.email + " Logged in");
+        setPopUptext(user.email + ' - Signed in!');
+        setShowPopup(true); 
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -62,7 +68,8 @@ const LogIn = () => {
     const auth = getAuth();
     auth.signOut().then(() => {
       // signed out
-      alert("Logged Out");
+      setPopUptext('Signed out!');
+      setShowPopup(true); 
     }).catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -101,6 +108,17 @@ const LogIn = () => {
           <button onClick={handleSignUp}>Sign Up</button>
           </div>
           {error && <p>{error}</p>}
+        </div>
+      )}
+            {/* Popup component */}
+            {showPopup && (
+        <div className="popup-added-cart">
+          <div className="popup-added-cart-content">
+            <h3>{popuptext}</h3>
+            <button className="popup-close-button" onClick={() => setShowPopup(false)}>
+              Close
+            </button>
+          </div>
         </div>
       )}
     </div>
