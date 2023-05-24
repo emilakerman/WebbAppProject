@@ -4,6 +4,8 @@ import video from "../assets/sample_mp4.mp4";
 import React, { useEffect, useRef, useState } from 'react';
 import { getAuth } from 'firebase/auth';
 import { getFirestore, doc, collection, getDocs, deleteDoc, addDoc } from 'firebase/firestore';
+import '.././VideoPlayer.css'
+import '.././StreamMovie.css'
 
 const StreamMoviePage = () => {
   const [rentedMovies, setRentedMovies] = useState([]);
@@ -25,13 +27,12 @@ const StreamMoviePage = () => {
   }, [db]);
 
   useEffect(() => {
-    console.log("Updated after 1 minute");
+    console.log("Updated after 30 seconds");
     const intervalId = setInterval(() => {
       rentedMovies.forEach((movie) => {
-        console.log("foreach")
         checkMovieExpiry(movie);
       });
-    }, 60000); // Run every minute (60000 milliseconds)
+    }, 30000); // Run every 30 seconds (30000 milliseconds)
 
     return () => {
       clearInterval(intervalId); // Cleanup interval when component unmounts
@@ -88,59 +89,54 @@ const StreamMoviePage = () => {
      toggleMute,
     } = VideoPlayer(videoElement);
 
-   return(
-     <div className='container'>
-      
-          <div className='RentedMovies'>
-            <h3>Rented Movies:</h3>
-            <ul>
-              {rentedMovies.map((movie) => (
-            <li key={movie.id}>
-            {movie.title}
-            <p>Rented at: {movie.rentedAt.toDate().toString()}</p>
-            <p>Expires on: {movie.expiryDate.toDate().toString()}</p>
-          </li>
-              ))}
-            </ul>
+    return (
+      <div className="container">
+        <div className="RentedMovies">
+          <h3>Rented Movies:</h3>
+          <ul>
+            {rentedMovies.map((movie) => (
+              <li key={movie.id}>
+                <h4>{movie.title}</h4>
+                <p>Rented at: {movie.rentedAt.toDate().toString()}</p>
+                <p>Expires on: {movie.expiryDate.toDate().toString()}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="video-wrapper">
+          <video src={video} ref={videoElement} onTimeUpdate={handleOnTimeUpdate} />
+          <div className="controls">
+            <div className="actions">
+              <div onClick={togglePlay} className="play-pause">
+                {playing ? 'Pause' : 'Play'}
+              </div>
+            </div>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={progress}
+              onChange={(e) => handleVideoProgress(e)}
+            />
+            <select
+              className="velocity"
+              value={speed}
+              onChange={(e) => handleVideoSpeed(e)}
+            >
+              <option value="0.50">0.50x</option>
+              <option value="1">1x</option>
+              <option value="1.25">1.25x</option>
+              <option value="1.5">1.5x</option>
+              <option value="2">2x</option>
+            </select>
+            <div onClick={toggleMute} className="mute-btn">
+              {muted ? 'Unmute' : 'Mute'}
+            </div>
           </div>
-
-       <div className='video-wrapper'>
-         <video 
-           src={video}
-           ref={videoElement}
-           onTimeUpdate={handleOnTimeUpdate}
-         />
-         <div className='controls'>
-           <div className='actions'>
-             <div onClick={togglePlay} className='play-pause'>
-               {playing ? 'Pause' : 'Play'}
-             </div>
-           </div>
-           <input 
-             type="range"
-             min="0"
-             max="100"
-             value={progress}
-             onChange={(e) => handleVideoProgress(e)} 
-           />
-           <select
-             className='velocity' 
-             value={speed}
-             onChange={(e) => handleVideoSpeed(e)}
-           >
-             <option value="0.50">0.50x</option>
-             <option value="1">1x</option>
-             <option value="1.25">1.25x</option>
-             <option value="1.5">1.5x</option>
-             <option value="2">2x</option>
-           </select>
-           <div onClick={toggleMute} className="mute-btn">
-             {muted ? 'Unmute' : 'Mute'}
-           </div>
-         </div>
-       </div>
-     </div>
-   );
+        </div>
+      </div>
+    );
+    
 };
 
    export default StreamMoviePage;
