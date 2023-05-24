@@ -86,7 +86,6 @@ const MovieCard = () => {
     }
   }
 
-  const [user, setUser] = useState(null); //keeps track of the userobj
 
 
   useEffect(() => {
