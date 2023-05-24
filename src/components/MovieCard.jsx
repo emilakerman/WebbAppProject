@@ -4,9 +4,16 @@ import { useLocation } from 'react-router-dom'
 import { getAuth } from "firebase/auth";
 import { getFirestore, collection, addDoc, doc } from "firebase/firestore";
 import { Link } from "react-router-dom"
+import Popup from 'reactjs-popup';
 
 
 const MovieCard = () => {
+
+  const [user, setUser] = useState(null);//keeps track of the userobj
+  const [showPopup, setShowPopup] = useState(false);
+  
+  
+
   /* ratings */
   const Star = ({ marked, starId, onClick }) => {
     return (
@@ -81,6 +88,7 @@ const MovieCard = () => {
 
   const [user, setUser] = useState(null); //keeps track of the userobj
 
+
   useEffect(() => {
     //Checks for userchanges log in changes
     const auth = getAuth();
@@ -118,7 +126,8 @@ const MovieCard = () => {
     const rentedMoviesRef = collection(userRef, "shoppingCart");
     addDoc(rentedMoviesRef, movieData)
       .then(() => {
-        alert("Movie added to cart!");
+        setShowPopup(true);
+
       })
       .catch((error) => {
         console.error("Error adding the movie ", error);
@@ -291,6 +300,17 @@ const MovieCard = () => {
           )}
         </div>
       </div>
+      {/* Popup component */}
+      {showPopup && (
+        <div className="popup-added-cart">
+          <div className="popup-added-cart-content">
+            <h3>Movie added to cart!</h3>
+            <button className="popup-close-button" onClick={() => setShowPopup(false)}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
