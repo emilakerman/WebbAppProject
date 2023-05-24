@@ -21,8 +21,10 @@ const Profile = () => {
       const user = getAuth().currentUser;
       if (user) {
         const userRef = doc(db, "users", user.uid);
+
         //PreviouslyRented istället för rented
         const shoppingCartRef = collection(userRef, "PreviouslyRented");
+
         const snapshot = await getDocs(shoppingCartRef);
         const cartItems = snapshot.docs.map((doc) => doc.data());
         setRented(cartItems);

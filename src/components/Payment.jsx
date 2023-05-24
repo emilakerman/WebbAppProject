@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getFirestore, doc, collection, getDocs, addDoc, deleteDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import { useLocation } from 'react-router-dom'
+
 import '.././payment.css';
 
 const Payment = () => {
@@ -94,6 +96,9 @@ const Payment = () => {
     // handle payment submission logic here
   };
 
+  const location = useLocation();
+  let { total } = location.state;
+
   return (
     <div>
       <div className="payment-form">
@@ -179,11 +184,12 @@ const Payment = () => {
             required
             pattern="^[^0-9]+$"
           />
-
+          <div className='payAndTotalContainer'>
           <Link to={'/StreamMoviePage'}>
-            <button className='payButton' type="submit" onClick={addMoviesToBought}>Pay Now</button>
+            <button className='payButton' type="submit" onClick={addMoviesToBought}>Pay</button>
           </Link>
-
+          <h2 className='payButton'>Total: {total}</h2>
+          </div>
         </form>
       </div>
     </div>
