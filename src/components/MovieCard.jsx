@@ -8,34 +8,116 @@ import Popup from 'reactjs-popup';
 
 
 const MovieCard = () => {
+
   const [user, setUser] = useState(null);//keeps track of the userobj
   const [showPopup, setShowPopup] = useState(false);
   
   
 
+  /* ratings */
+  const Star = ({ marked, starId, onClick }) => {
+    return (
+      <span
+        star-id={starId}
+        style={{ color: "#ff9933" }}
+        role="button"
+        onClick={onClick}
+      >
+        {marked ? "\u2605" : "\u2606"}
+      </span>
+    );
+  };
+
+  class Rating extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        rating:
+          typeof this.props.initialRating === "number"
+            ? this.props.initialRating
+            : 0,
+        temp_rating: null,
+      };
+    }
+    rate(starId) {
+      this.setState({
+        rating: starId,
+        temp_rating: starId,
+      });
+      publishRating(
+        starId,
+        title
+      ); /* send rating to firestore here, send starID, title*/
+    }
+    star_over(starId) {
+      this.setState({
+        rating: this.state.rating,
+        temp_rating: starId,
+      });
+    }
+    star_out() {
+      this.setState({
+        rating: this.state.rating,
+        temp_rating: null,
+      });
+    }
+    render() {
+      const { totalStars } = this.props;
+      const { rating, temp_rating } = this.state;
+      return (
+        <div
+          style={{ fontSize: "40px", textAlign: "center", direction: "rtl" }}
+          onMouseOut={() => this.star_out()}
+        >
+          {Array.from({ length: totalStars }, (_, index) => {
+            const starId = index + 1;
+            return (
+              <Star
+                starId={starId}
+                key={`star_${starId}`}
+                marked={temp_rating ? temp_rating >= starId : rating >= starId}
+                onMouseOver={() => this.star_over(starId)}
+                onClick={() => this.rate(starId)}
+              />
+            );
+          })}
+        </div>
+      );
+    }
+  }
+
+  const [user, setUser] = useState(null); //keeps track of the userobj
+
+
   useEffect(() => {
     //Checks for userchanges log in changes
     const auth = getAuth();
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      setUser(user); 
+      setUser(user);
     });
     return unsubscribe;
   }, []);
 
-  const handleRentMovie = () =>{
+  const handleRentMovie = () => {
     const auth = getAuth();
     const currentUser = auth.currentUser;
 
-    if(!currentUser){
-      alert("Please log in to rent!")
+    if (!currentUser) {
+      alert("Please log in to rent!");
       return;
     }
+
+    const getRandomPrice = () => {
+      return Math.floor(Math.random() * 100) + 1;
+    };
 
     const movieData = {
       title: title,
       genre: genre,
       release_date: release_date,
-      score: score
+      score: score,
+
+
     };
 
     const db = getFirestore();
@@ -45,15 +127,79 @@ const MovieCard = () => {
     addDoc(rentedMoviesRef, movieData)
       .then(() => {
         setShowPopup(true);
+
       })
       .catch((error) => {
         console.error("Error adding the movie ", error);
       });
   };
+  const publishRating = (starId) => {
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
 
-  const location = useLocation()
-  let { title, release_date, img, genre, overview, score } = location.state
+    if (!currentUser) {
+      alert("Please log in to rate!");
+      return;
+    }
+    //save timestamp
+    const getTimestampInSeconds = () => {
+      return Math.floor(Date.now() / 1000);
+    };
 
+    const ratingsData = {
+      rating: starId,
+      title: title,
+      timestamp: getTimestampInSeconds(),
+    };
+
+    const db = getFirestore();
+    const userRef = doc(db, "users", currentUser.uid);
+
+    const ratingsRef = collection(userRef, "ratings");
+    addDoc(ratingsRef, ratingsData)
+      .then(() => {
+        alert("Rating uploaded!");
+      })
+      .catch((error) => {
+        console.error("Error rating ", error);
+      });
+  };
+
+  const location = useLocation();
+  let { title, release_date, img, genre, overview, score } = location.state;
+
+  /* mobile checker */
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIfMobile = () => {
+      const isMobileDevice = window.innerWidth <= 768; // Adjust the breakpoint as needed
+      setIsMobile(isMobileDevice);
+    };
+
+    checkIfMobile(); // Initial check on component mount
+
+    // Update on resize
+    window.addEventListener('resize', checkIfMobile);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', checkIfMobile);
+    };
+  }, []);
+
+  let paragraphContent = null;
+  if (isMobile) {
+    paragraphContent = (
+      <details>
+        <p className="movie-info">{overview}</p>
+      </details>
+    )
+  } else { 
+    paragraphContent = (
+    <p className="movie-info">{overview}</p>
+    )
+  }
   switch (genre) {
     case 28:
       genre = "Action";
@@ -115,27 +261,37 @@ const MovieCard = () => {
     default:
       genre = "Unknown";
       break;
-  }  
+  }
   return (
     <div className="outerContainer">
       <div className="movie-page">
         <div className="imageSection">
-          <img src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${img}`} 
-          alt="Image" onError={(e) => { e.target.onerror = null; e.target.src = 'https://i.imgur.com/rnnnNuu.png' }}/>
+          <img
+            src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2/${img}`}
+            alt="Image"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = "https://i.imgur.com/rnnnNuu.png";
+            }}
+          />
         </div>
         <div className="rightSection">
-          <h2 className='movie-tagline'>{title}</h2>
-          <p className='movie-info'>{overview}</p>
-          <div className='genreReleaseContainer'>
+          <h2 className="movie-tagline">{title}</h2>
+          {paragraphContent}
+          <div className="genreReleaseContainer">
             <h3>{genre}</h3>
             <h3>{release_date}</h3>
             <h3>{score}</h3>
           </div>
-
+          <div className="ratingsContainer">
+            <Rating totalStars={5} initialRating={0} title={title} />
+          </div>
           {/* If user is logged in: Can rent. if not: Log in to rent */}
           {user ? (
             <div id="movieCardButtonContainer">
-              <button className='button' onClick={handleRentMovie}>Rent & Watch Online</button>
+              <button className="rentWatchButton" onClick={handleRentMovie}>
+                Rent & Watch Online
+              </button>
             </div>
           ) : (
             <button>
