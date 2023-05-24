@@ -18,6 +18,9 @@ export default function Navbar() {
         <li>
            <Link to="/LogIn">Account</Link>
         </li>
+        <li>
+           <Link to={'/StreamMoviePage'}>Stream</Link>
+        </li>
       </ul>
     </nav>
   )
