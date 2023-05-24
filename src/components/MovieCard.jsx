@@ -11,7 +11,6 @@ const MovieCard = () => {
 
   const [user, setUser] = useState(null);//keeps track of the userobj
   const [showPopup, setShowPopup] = useState(false);
-
   const [popuptext, setPopUptext] = useState('');
   
   
