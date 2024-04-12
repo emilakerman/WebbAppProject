@@ -3,17 +3,14 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom'
 import { getAuth } from "firebase/auth";
 import { getFirestore, collection, addDoc, doc } from "firebase/firestore";
-import { Link } from "react-router-dom"
-import Popup from 'reactjs-popup';
-
+import { Link } from "react-router-dom";
 
 const MovieCard = () => {
 
-  const [user, setUser] = useState(null);//keeps track of the userobj
+  // Keeps track of the userobj.
+  const [user, setUser] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const [popuptext, setPopUptext] = useState('');
-  
-  
 
   /* ratings */
   const Star = ({ marked, starId, onClick }) => {
@@ -90,7 +87,7 @@ const MovieCard = () => {
 
 
   useEffect(() => {
-    //Checks for userchanges log in changes
+    // Checks for userchanges log in changes
     const auth = getAuth();
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setUser(user);
@@ -104,7 +101,7 @@ const MovieCard = () => {
 
     if (!currentUser) {
       setPopUptext('Please login to rent!');
-      setShowPopup(true); 
+      setShowPopup(true);
       return;
     }
 
@@ -140,7 +137,7 @@ const MovieCard = () => {
 
     if (!currentUser) {
       setPopUptext('Please login to rate!');
-      setShowPopup(true); 
+      setShowPopup(true);
       return;
     }
     //save timestamp
@@ -161,7 +158,7 @@ const MovieCard = () => {
     addDoc(ratingsRef, ratingsData)
       .then(() => {
         setPopUptext('Rating published!');
-        setShowPopup(true); 
+        setShowPopup(true);
       })
       .catch((error) => {
         console.error("Error rating ", error);
@@ -198,9 +195,9 @@ const MovieCard = () => {
         <p className="movie-info">{overview}</p>
       </details>
     )
-  } else { 
+  } else {
     paragraphContent = (
-    <p className="movie-info">{overview}</p>
+      <p className="movie-info">{overview}</p>
     )
   }
   switch (genre) {

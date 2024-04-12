@@ -22,7 +22,6 @@ const Profile = () => {
       if (user) {
         const userRef = doc(db, "users", user.uid);
 
-        //PreviouslyRented istället för rented
         const shoppingCartRef = collection(userRef, "PreviouslyRented");
 
         const snapshot = await getDocs(shoppingCartRef);
@@ -38,7 +37,7 @@ const Profile = () => {
     };
     fetchShoppingCart();
   }, [db]);
-  //removes duplicate reviews by only keeping the one with the latest timestamp
+  // Removes duplicate reviews by only keeping the one with the latest timestamp
   function removeDuplicateWithMinTimestamp(array) {
     const titleCount = {};
     const timestampMap = {};
@@ -105,14 +104,12 @@ const Profile = () => {
               .catch((error) => {
                 console.log(error.message, "error getting the image url");
               });
-            // setImage(url);
           })
           .catch((error) => {
             console.log(error.message);
           });
       }
       else if (!image) {
-        // console.log(image)
       }
     };
     /* showing lists or not, as well as hiding some css*/
@@ -138,7 +135,7 @@ const Profile = () => {
       } else {setListsShowing(true)}
     }, [rented.length, reviews.length, showingPrevious, showingRatings]);
   
-    //this one hides the container for the profile when both lists are empty
+    // Hides the container for the profile when both lists are empty
     const profileContainer = listsShowing ? 'profileContainer' : 'hiddenProfileContainer';
 
   
