@@ -19,11 +19,8 @@
     "react-dom": "^18.2.0",
     "react-ratings-declarative": "^3.4.1",
     "react-router-dom": "^6.10.0",
-
-    "reactjs-popup": "^2.0.5",
-
     "react-star-ratings": "^2.3.0",
-
+    "reactjs-popup": "^2.0.5",
     "redaxios": "^0.5.1",
     "router": "^1.3.8"
   },
@@ -31,6 +28,11 @@
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^3.1.0",
+    "dotenv": "^16.4.5",
+    "react-error-overlay": "^6.0.9",
     "vite": "^4.2.0"
+  },
+  "resolutions": {
+    "react-error-overlay": "6.0.9"
   }
 }

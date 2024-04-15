@@ -9,10 +9,11 @@ import LogIn from './components/LogIn';
 import ShoppingCart from './components/ShoppingCart';
 import Payment from './components/Payment';
 import StreamMoviePage from './components/StreamMoviePage';
+import 'dotenv/config'
+
 
 function App() {
   return (
-
     <>
       <Navbar />
       <div>
